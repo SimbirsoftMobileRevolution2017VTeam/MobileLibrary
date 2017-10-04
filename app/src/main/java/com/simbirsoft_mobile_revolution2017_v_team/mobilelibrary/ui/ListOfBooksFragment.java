@@ -3,11 +3,15 @@ package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.R;
+import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Library;
+import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.adapters.RecyclerViewAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,7 +28,17 @@ public class ListOfBooksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list_of_books, container, false);
+        View view = inflater.inflate(R.layout.fragment_list_of_books, container, false);
+
+        RecyclerView mRecyclerView = (RecyclerView)view.findViewById(R.id.recyclerview);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        Library library = new Library();
+        library.loadLibrary();
+
+        mRecyclerView.setAdapter(new RecyclerViewAdapter(library.getBooks()));
+
+        return view;
     }
 
 }

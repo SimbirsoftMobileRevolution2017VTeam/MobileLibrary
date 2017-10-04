@@ -19,16 +19,6 @@ public class Library {
         createFictionData();
     }
 
-    public Book getBookWithIndex(int index) {
-        if(books.size() == 0){
-            return null;
-        }
-        if((index < 0) || (index >= books.size())){
-            return null;
-        }
-        return books.get(index);
-    }
-
     private void createFictionData(){
         books.add(new Book("Снежная Королева", "Ханс Андерсен", createDateFromString("2017"), "Верже ИД", "9785906928030", 72, true));
         books.add(new Book("Незнакомка", "Анна Рэй", createDateFromString("2017"), "Альфа-книга", "978-5-9922-2492-4", 314, true));

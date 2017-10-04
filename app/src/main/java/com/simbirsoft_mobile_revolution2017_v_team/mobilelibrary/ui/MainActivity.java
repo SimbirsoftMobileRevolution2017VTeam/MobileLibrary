@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new ListOfBooksFragment(), "Books");
-        adapter.addFragment(new ListOfBooksFragment(), "Favorites");
+        //adapter.addFragment(new ListOfBooksFragment(), "Favorites");
         viewPager.setAdapter(adapter);
     }
 
