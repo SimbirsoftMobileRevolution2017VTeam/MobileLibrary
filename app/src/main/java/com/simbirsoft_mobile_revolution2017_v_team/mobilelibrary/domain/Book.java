@@ -1,4 +1,4 @@
-package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary;
+package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain;
 
 import java.util.Date;
 

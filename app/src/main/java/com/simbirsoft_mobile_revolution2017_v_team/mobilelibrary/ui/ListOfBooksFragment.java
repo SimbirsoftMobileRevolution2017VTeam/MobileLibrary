@@ -1,4 +1,4 @@
-package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.SecondaryMenuWithContent;
+package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui;
 
 
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BooksFragment extends Fragment {
+public class ListOfBooksFragment extends Fragment {
 
 
-    public BooksFragment() {
+    public ListOfBooksFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class BooksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_books, container, false);
+        return inflater.inflate(R.layout.fragment_list_of_books, container, false);
     }
 
 }
