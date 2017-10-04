@@ -9,21 +9,11 @@ import android.view.ViewGroup;
 
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class BookFragment extends Fragment {
-
-
-    public BookFragment() {
-        // Required empty public constructor
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_book, container, false);
     }
 

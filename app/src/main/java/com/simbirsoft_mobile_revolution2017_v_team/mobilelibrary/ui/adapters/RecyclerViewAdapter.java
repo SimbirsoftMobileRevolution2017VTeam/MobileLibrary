@@ -2,6 +2,8 @@ package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.adapters;
 
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.R;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Book;
+
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,11 +26,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView mTextView;
+        public CardView cardView;
+        public TextView textName;
+        public TextView textAuthor;
 
         public ViewHolder(View v) {
             super(v);
-            mTextView = (TextView) v.findViewById(R.id.recycleritem);
+            cardView = (CardView) v.findViewById(R.id.recycleritem);
+            textName = (TextView) v.findViewById(R.id.name);
+            textAuthor = (TextView) v.findViewById(R.id.author);
         }
     }
 
@@ -45,7 +51,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        holder.mTextView.setText(books.get(position).getName());
+        holder.textName.setText(books.get(position).getName());
+        holder.textAuthor.setText(books.get(position).getAuthor());
 
     }
 

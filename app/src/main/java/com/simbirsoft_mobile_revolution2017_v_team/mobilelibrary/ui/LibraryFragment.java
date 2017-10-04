@@ -13,24 +13,17 @@ import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.R;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Library;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.adapters.RecyclerViewAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class ListOfBooksFragment extends Fragment {
 
-
-    public ListOfBooksFragment() {
-        // Required empty public constructor
-    }
-
+public class LibraryFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_list_of_books, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_library, container, false);
 
         RecyclerView mRecyclerView = (RecyclerView)view.findViewById(R.id.recyclerview);
+        mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         Library library = new Library();
