@@ -12,3 +12,4 @@ tools:context="com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.Libr
     android:layout_height="match_parent"
     tools:layout="@layout/fragment_list_books" />
 </FrameLayout>
+

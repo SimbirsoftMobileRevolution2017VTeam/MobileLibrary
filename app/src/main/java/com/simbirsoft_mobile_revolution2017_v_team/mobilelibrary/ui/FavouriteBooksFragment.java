@@ -14,23 +14,21 @@ import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Fragment
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Library;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.adapters.RecyclerViewAdapter;
 
-
-public class ListBooksFragment extends Fragment {
+public class FavouriteBooksFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_favourite_books, container, false);
 
-        View view = inflater.inflate(R.layout.fragment_list_books, container, false);
-
-        RecyclerView mRecyclerView = (RecyclerView)view.findViewById(R.id.recyclerview);
+        RecyclerView mRecyclerView = view.findViewById(R.id.rvFavourite);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         Library library = new Library();
         library.loadLibrary();
 
-        mRecyclerView.setAdapter(new RecyclerViewAdapter(library.getBooks(), FragmentType.Library));
+        mRecyclerView.setAdapter(new RecyclerViewAdapter(library.getBooks(), FragmentType.FavouriteBooks));
 
         return view;
     }

@@ -12,14 +12,14 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:padding="@dimen/main_padding"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/name"
                 android:layout_alignParentTop="true"
-                android:textSize="30sp"
+                android:textSize="@dimen/main_name_size"
                 />
             <TextView
                 android:layout_width="wrap_content"

@@ -16,12 +16,16 @@ public class Book {
     private String ISBN;
     private int numberOfPages;
     private boolean isAvailable;
+    private boolean wasReaded;
+    private boolean isFavourite;
 
     public Book() {
     }
 
-    public Book(String name, String author, Date year, String publishingHouse,
-                String ISBN, int numberOfPages, boolean isAvailable) {
+    public Book(int id, String name, String author, Date year, String publishingHouse,
+                String ISBN, int numberOfPages, boolean isAvailable, boolean wasReaded,
+                boolean isFavourite) {
+        this.id = id;
         this.name = name;
         this.author = author;
         this.year = year;
@@ -29,6 +33,8 @@ public class Book {
         this.ISBN = ISBN;
         this.numberOfPages = numberOfPages;
         this.isAvailable = isAvailable;
+        this.wasReaded = wasReaded;
+        this.isFavourite = isFavourite;
     }
 
     public int getId() {
@@ -89,5 +95,21 @@ public class Book {
 
     public void setAvailable(boolean available) {
         isAvailable = available;
+    }
+
+    public boolean isWasReaded() {
+        return wasReaded;
+    }
+
+    public void setWasReaded(boolean wasReaded) {
+        this.wasReaded = wasReaded;
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
     }
 }

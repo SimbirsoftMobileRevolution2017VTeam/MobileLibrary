@@ -11,6 +11,10 @@ import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.R;
 
 public class BookDetailFragment extends Fragment {
 
+    public BookDetailFragment() {
+        // Required empty public constructor
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
