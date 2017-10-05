@@ -7,7 +7,7 @@ android:orientation="horizontal"
 tools:context="com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.LibraryFragment">
 
     <fragment
-        android:id="@+id/fragment_library_master"
+        android:id="@+id/fragment_list_books"
         android:name="com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.ListBooksFragment"
         android:layout_width="0px"
         android:layout_height="match_parent"
@@ -16,7 +16,7 @@ tools:context="com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.Libr
 
 
     <fragment
-        android:id="@+id/fragment_library_detail"
+        android:id="@+id/fragment_book_detail"
         android:name="com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.BookDetailFragment"
         android:layout_width="0px"
         android:layout_height="match_parent"

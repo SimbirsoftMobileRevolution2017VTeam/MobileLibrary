@@ -6,7 +6,7 @@ android:layout_height="match_parent"
 tools:context="com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.LibraryFragment">
 
 <fragment
-    android:id="@+id/fragment_library_master"
+    android:id="@+id/fragment_list_books"
     android:name="com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.ListBooksFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
