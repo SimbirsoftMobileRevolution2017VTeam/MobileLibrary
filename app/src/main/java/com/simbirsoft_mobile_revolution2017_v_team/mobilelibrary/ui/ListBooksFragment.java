@@ -14,13 +14,13 @@ import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Library;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.adapters.RecyclerViewAdapter;
 
 
-public class LibraryMasterFragment extends Fragment {
+public class ListBooksFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_library_master, container, false);
+        View view = inflater.inflate(R.layout.fragment_list_books, container, false);
 
         RecyclerView mRecyclerView = (RecyclerView)view.findViewById(R.id.recyclerview);
         mRecyclerView.setHasFixedSize(true);

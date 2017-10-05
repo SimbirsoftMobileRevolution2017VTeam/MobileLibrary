@@ -8,19 +8,19 @@ tools:context="com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.Libr
 
     <fragment
         android:id="@+id/fragment_library_master"
-        android:name="com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.LibraryMasterFragment"
+        android:name="com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.ListBooksFragment"
         android:layout_width="0px"
         android:layout_height="match_parent"
-        tools:layout="@layout/fragment_library_master"
+        tools:layout="@layout/fragment_list_books"
         android:layout_weight="3"/>
 
 
     <fragment
         android:id="@+id/fragment_library_detail"
-        android:name="com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.LibraryDetailFragment"
+        android:name="com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.BookDetailFragment"
         android:layout_width="0px"
         android:layout_height="match_parent"
-        tools:layout="@layout/fragment_library_detail"
+        tools:layout="@layout/fragment_book_detail"
         android:layout_weight="7"/>
 
 </LinearLayout>
