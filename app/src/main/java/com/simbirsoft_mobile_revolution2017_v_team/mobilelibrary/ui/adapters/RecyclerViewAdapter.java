@@ -1,18 +1,16 @@
 package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.adapters;
 
-import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.R;
-import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Book;
-import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.FragmentType;
-import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.LibraryDiffCallback;
-
-import android.support.annotation.MainThread;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Switch;
 import android.widget.TextView;
+
+import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.R;
+import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Book;
+import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.FragmentType;
+import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.LibraryDiffCallback;
 
 import java.util.Iterator;
 import java.util.List;
@@ -39,7 +37,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-
+        // Можно еще добавить библиотеку ButterKnife
+        // для биндингов на UI
         public TextView textName;
         public TextView textAuthor;
 
@@ -48,6 +47,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             textName = v.findViewById(R.id.name);
             textAuthor = v.findViewById(R.id.author);
         }
+
+        /**
+         * В идеале еще нужно было добавить клик по элементу и переход на экран детального описания
+         * если мы находимся в "портретном режиме"
+         */
     }
 
     @Override

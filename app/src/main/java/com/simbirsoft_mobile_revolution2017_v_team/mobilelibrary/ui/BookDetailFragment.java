@@ -11,6 +11,9 @@ import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.R;
 
 public class BookDetailFragment extends Fragment {
 
+    /**
+     * Нет отображения информации о выбранной книге
+     */
     public BookDetailFragment() {
         // Required empty public constructor
     }

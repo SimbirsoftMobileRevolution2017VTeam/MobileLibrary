@@ -21,6 +21,7 @@ public class FavouriteBooksFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favourite_books, container, false);
 
+        //layout'ы лучше именовать under_score
         RecyclerView mRecyclerView = view.findViewById(R.id.rvFavourite);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
