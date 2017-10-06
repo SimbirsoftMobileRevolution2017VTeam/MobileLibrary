@@ -5,13 +5,11 @@ import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Book;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.FragmentType;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.LibraryDiffCallback;
 
-import android.support.annotation.MainThread;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.Iterator;
@@ -23,30 +21,49 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
+    public interface OnBookClickListener{
+        void onBookClicked(int bookId);
+    }
+
     private List<Book> books;
 
-    public RecyclerViewAdapter(List<Book> books, FragmentType type) {
+    private OnBookClickListener adapterClickListener;
+
+    public RecyclerViewAdapter(List<Book> books, FragmentType type, OnBookClickListener adapterClickListener) {
         this.books = books;
+        this.adapterClickListener = adapterClickListener;
         switch(type){
             case Library: {
-                break;
+                return;
             }
             case FavouriteBooks: {
                 filterFavouriteBooks();
-                break;
+                return;
             }
         }
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        public View view;
         public TextView textName;
         public TextView textAuthor;
+        public int bookId;
+        public OnBookClickListener bookClickListener;
 
-        public ViewHolder(View v) {
+        public ViewHolder(View v, OnBookClickListener abstractClickListener) {
             super(v);
+            view = v;
             textName = v.findViewById(R.id.name);
             textAuthor = v.findViewById(R.id.author);
+            bookId = -1;
+            bookClickListener = abstractClickListener;
+            v.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            bookClickListener.onBookClicked(bookId);
         }
     }
 
@@ -56,12 +73,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_item_book, parent, false);
 
-        ViewHolder vh = new ViewHolder(v);
+        ViewHolder vh = new ViewHolder(v, adapterClickListener);
         return vh;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.bookId = books.get(position).getId();
         holder.textName.setText(books.get(position).getName());
         holder.textAuthor.setText(books.get(position).getAuthor());
     }
@@ -89,5 +107,4 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.books = library;
         diffResult.dispatchUpdatesTo(this);
     }
-
 }

@@ -5,12 +5,13 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
         android:id="@+id/label_name"
-        android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:text="Название" />
+        android:layout_margin="10dp"
+        android:text="@string/name"
+        tools:text="@string/name" />
 
     <TextView
         android:id="@+id/textView_name"
@@ -24,12 +25,13 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
         android:id="@+id/label_author"
-        android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:text="Автор"
-        android:layout_below="@id/label_name"/>
+        android:layout_below="@id/label_name"
+        android:layout_margin="10dp"
+        android:text="@string/author"
+        tools:text="@string/author" />
 
     <TextView
         android:id="@+id/textView_author"
@@ -43,12 +45,13 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
         android:id="@+id/label_year"
-        android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:text="Год"
-        android:layout_below="@id/label_author"/>
+        android:layout_below="@id/label_author"
+        android:layout_margin="10dp"
+        android:text="@string/year"
+        tools:text="@string/year" />
 
     <TextView
         android:id="@+id/textView_year"
@@ -62,12 +65,13 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
         android:id="@+id/label_publishingHouse"
-        android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:text="Издательство"
-        android:layout_below="@id/label_year"/>
+        android:layout_below="@id/label_year"
+        android:layout_margin="10dp"
+        android:text="@string/publishing_house"
+        tools:text="@string/publishing_house" />
 
     <TextView
         android:id="@+id/textView_publishingHouse"
@@ -81,12 +85,13 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
         android:id="@+id/label_ISBN"
-        android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:text="ISBN"
-        android:layout_below="@id/label_publishingHouse"/>
+        android:layout_below="@id/label_publishingHouse"
+        android:layout_margin="10dp"
+        android:text="@string/ISBN"
+        tools:text="@string/ISBN" />
 
     <TextView
         android:id="@+id/textView_ISBN"
@@ -100,12 +105,13 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
         android:id="@+id/label_numberOfPages"
-        android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Кол-во страниц"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/label_ISBN"/>
+        android:layout_below="@id/label_ISBN"
+        android:layout_margin="10dp"
+        android:text="@string/page_number"
+        tools:text="@string/page_number" />
 
     <TextView
         android:id="@+id/textView_numberOfPages"

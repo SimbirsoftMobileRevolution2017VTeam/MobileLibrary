@@ -1,6 +1,5 @@
 package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,13 +7,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.R;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.FragmentType;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Library;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.adapters.RecyclerViewAdapter;
 
-public class FavouriteBooksFragment extends Fragment {
+public class FavouriteBooksFragment extends Fragment implements RecyclerViewAdapter.OnBookClickListener{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,9 +28,14 @@ public class FavouriteBooksFragment extends Fragment {
         Library library = new Library();
         library.loadLibrary();
 
-        mRecyclerView.setAdapter(new RecyclerViewAdapter(library.getBooks(), FragmentType.FavouriteBooks));
+        mRecyclerView.setAdapter(new RecyclerViewAdapter(library.getBooks(), FragmentType.FavouriteBooks, this));
 
         return view;
+    }
+
+    @Override
+    public void onBookClicked(int bookId) {
+        Toast.makeText(getActivity().getApplicationContext(),"favourite " + bookId, Toast.LENGTH_SHORT).show();
     }
 
 }
