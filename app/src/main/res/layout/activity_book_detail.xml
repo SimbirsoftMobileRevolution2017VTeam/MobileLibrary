@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.BookDetailActivity">
+    tools:context=".view.ui.activities.BookDetailActivity">
 
     <fragment
         android:id="@+id/fragment_book_detail"
-        android:name="com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.BookDetailFragment"
+        android:name="com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.view.ui.fragments.BookDetailFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:layout="@layout/fragment_book_detail" />

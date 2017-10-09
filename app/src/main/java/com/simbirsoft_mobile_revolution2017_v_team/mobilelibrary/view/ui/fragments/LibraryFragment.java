@@ -1,4 +1,4 @@
-package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui;
+package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.view.ui.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,20 +9,20 @@ import android.view.ViewGroup;
 
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.R;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Book;
+import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.view.ui.activities.BookDetailActivity;
 
 public class LibraryFragment extends Fragment implements ListBooksFragment.OnListFragmentEventListener{
 
     public static final String BOOK_ID_ARGUMENT = "BOOK_ID";
-    public static final String BUNDLE_ID_ARGUMENT = "BUNDLE_ID";
+
+    boolean mDualPane;
+    int mCurCheckPosition = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_library, container, false);
     }
-
-    boolean mDualPane;
-    int mCurCheckPosition = 0;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {

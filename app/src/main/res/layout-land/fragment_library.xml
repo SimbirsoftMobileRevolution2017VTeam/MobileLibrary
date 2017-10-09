@@ -4,11 +4,11 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="horizontal"
-tools:context="com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.LibraryFragment">
+tools:context=".view.ui.fragments.LibraryFragment">
 
     <fragment
         android:id="@+id/fragment_list_books"
-        android:name="com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.ListBooksFragment"
+        android:name="com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.view.ui.fragments.ListBooksFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="3"

@@ -1,4 +1,4 @@
-package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.adapters;
+package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.view.ui.adapters;
 
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.R;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Book;
@@ -29,18 +29,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private OnBookClickListener adapterClickListener;
 
-    public RecyclerViewAdapter(List<Book> books, FragmentType type, OnBookClickListener adapterClickListener) {
+    public RecyclerViewAdapter(List<Book> books, OnBookClickListener adapterClickListener) {
         this.books = books;
         this.adapterClickListener = adapterClickListener;
-        switch(type){
-            case Library: {
-                return;
-            }
-            case FavouriteBooks: {
-                filterFavouriteBooks();
-                return;
-            }
-        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -89,24 +80,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public int getItemCount() {
         return books.size();
-    }
-
-    private void filterFavouriteBooks(){
-        Iterator<Book> iterator = books.iterator();
-        while(iterator.hasNext()) {
-            Book next = iterator.next();
-            if(!next.isFavourite()) {
-                iterator.remove();
-            }
-        }
-        updateLibraryListItems(books);
-    }
-
-    private void updateLibraryListItems(List<Book> library) {
-        final LibraryDiffCallback diffCallback = new LibraryDiffCallback(library, this.books);
-        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
-
-        this.books = library;
-        diffResult.dispatchUpdatesTo(this);
     }
 }
