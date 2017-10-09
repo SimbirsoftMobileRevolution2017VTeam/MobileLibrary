@@ -1,4 +1,4 @@
-package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.view.ui.fragments;
+package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,8 @@ import android.view.ViewGroup;
 
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.R;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Book;
-import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.view.ui.activities.BookDetailActivity;
+import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.activities.BookDetailActivity;
+import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.fragments.ListBooksFragment.ListBooksFragment;
 
 public class LibraryFragment extends Fragment implements ListBooksFragment.OnListFragmentEventListener{
 

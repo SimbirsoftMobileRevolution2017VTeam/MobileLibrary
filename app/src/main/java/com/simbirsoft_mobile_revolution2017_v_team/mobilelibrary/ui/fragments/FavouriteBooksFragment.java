@@ -1,4 +1,4 @@
-package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.view.ui.fragments;
+package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,34 +11,26 @@ import android.widget.Toast;
 
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.R;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Book;
-import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.FragmentType;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.presenter.LibraryPresenter;
-import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.view.ui.IView;
-import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.view.ui.adapters.RecyclerViewAdapter;
+import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.view.ILibraryView;
+import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.fragments.ListBooksFragment.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListBooksFragment extends Fragment implements RecyclerViewAdapter.OnBookClickListener, IView {
-
-    public interface OnListFragmentEventListener{
-        void listFragmentEventTriggered(Book book);
-    }
+public class FavouriteBooksFragment extends Fragment implements RecyclerViewAdapter.OnBookClickListener, ILibraryView {
 
     private List<Book> library = new ArrayList<>();
-    private Book bookInfo = new Book();
     private LibraryPresenter presenter = new LibraryPresenter();
-    private OnListFragmentEventListener parentFragment;
     private RecyclerView mRecyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_list_books, container, false);
+        View view = inflater.inflate(R.layout.fragment_favourite_books, container, false);
 
-        parentFragment = (OnListFragmentEventListener)getParentFragment();
-
-        mRecyclerView = view.findViewById(R.id.rvAllBooks);
+        //layout'ы лучше именовать under_score
+        mRecyclerView = view.findViewById(R.id.rvFavourite);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -48,10 +40,15 @@ public class ListBooksFragment extends Fragment implements RecyclerViewAdapter.O
     }
 
     @Override
+    public void onBookClicked(int bookId) {
+        Toast.makeText(getActivity().getApplicationContext(),"favourite " + bookId, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
-        presenter.loadLibrary(FragmentType.LIBRARY);
-        mRecyclerView.setAdapter(new RecyclerViewAdapter(library, this));
+        presenter.loadFavourites();
+        mRecyclerView.setAdapter(new RecyclerViewAdapter(this.library, this));
     }
 
     @Override
@@ -61,24 +58,17 @@ public class ListBooksFragment extends Fragment implements RecyclerViewAdapter.O
     }
 
     @Override
-    public void onBookClicked(int bookId) {
-        Toast.makeText(getActivity().getApplicationContext(),"library " + bookId, Toast.LENGTH_SHORT).show();
-        presenter.loadBook(bookId);
-        parentFragment.listFragmentEventTriggered(bookInfo);
-    }
-
-    @Override
     public void onDataReceived(List<Book> library) {
         this.library = library;
     }
 
     @Override
     public void onDataReceived(Book book) {
-        this.bookInfo = book;
+
     }
 
     @Override
     public void onDataCreated(List<Book> library) {
-        //additional event for something
+
     }
 }

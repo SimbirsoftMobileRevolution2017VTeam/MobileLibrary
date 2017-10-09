@@ -1,4 +1,4 @@
-package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.model;
+package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.repository;
 
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Book;
 
@@ -11,15 +11,17 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by Denis on 09.10.2017.
+ * Created by Olegka on 09.10.2017.
  */
 
-public class LibraryModel implements IBookGetter {
-
+public class LibraryRepository implements IRepository {
+    @Override
     public List<Book> getBooks() {
-        return createFictionData();
+        List<Book> books = createFictionData();
+        return books;
     }
 
+    @Override
     public Book getBookWithId(int id) {
         List<Book> books = createFictionData();
         if(books.size() == 0){
@@ -33,7 +35,8 @@ public class LibraryModel implements IBookGetter {
         return null;
     }
 
-    public List<Book> getFilteredFavouriteBooks(){
+    @Override
+    public List<Book> getFavouriteBooks() {
         List<Book> books = createFictionData();
         Iterator<Book> iterator = books.iterator();
         while(iterator.hasNext()) {
@@ -44,10 +47,7 @@ public class LibraryModel implements IBookGetter {
         }
         return books;
     }
-    /**
-     * Вместо этого метода другой должен работать с БД на сервере
-     * In future this method must be changed for request data from DB
-     *  */
+
     private List<Book> createFictionData(){
         List<Book> books = new ArrayList<>();
         books.add(new Book(0, "Снежная Королева", "Ханс Андерсен", createDateFromString("2017"), "Верже ИД", "9785906928030", 72, true, false, false));

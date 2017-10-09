@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.ui.fragments.FavouriteBooksFragment">
+    tools:context=".ui.fragments.FavouriteBooksFragment">
 
     <!-- TODO: Update blank fragment layout -->
 

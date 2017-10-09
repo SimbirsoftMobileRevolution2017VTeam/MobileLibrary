@@ -1,18 +1,14 @@
-package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.view.ui.adapters;
+package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.fragments.ListBooksFragment;
 
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.R;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Book;
-import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.FragmentType;
-import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.LibraryDiffCallback;
 
-import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
