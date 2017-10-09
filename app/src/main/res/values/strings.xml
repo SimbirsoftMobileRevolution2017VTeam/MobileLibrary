@@ -3,5 +3,11 @@
 
     <string name="books">Books</string>
     <string name="favourites">Favourites</string>
+    <string name="name">Название</string>
+    <string name="author">Автор</string>
+    <string name="year">Год</string>
+    <string name="publishing_house">Издательство</string>
+    <string name="ISBN">ISBN</string>
+    <string name="page_number">Кол-во страниц</string>
 
 </resources>

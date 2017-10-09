@@ -1,12 +1,18 @@
 package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
  * Created by Denis on 03.10.2017.
  */
 
-public class Book {
+public class Book implements Parcelable{
+
+    private final static SimpleDateFormat format = new SimpleDateFormat("yyyy");
 
     private int id;
     private String name;
@@ -39,6 +45,10 @@ public class Book {
         this.isAvailable = isAvailable;
         this.wasReaded = wasReaded;
         this.isFavourite = isFavourite;
+    }
+
+    public static SimpleDateFormat getFormat(){
+        return format;
     }
 
     public int getId() {
@@ -116,4 +126,50 @@ public class Book {
     public void setFavourite(boolean favourite) {
         isFavourite = favourite;
     }
+
+    public Book(Parcel parcel){
+        String[] data = new String[7];
+        parcel.readStringArray(data);
+        this.id = -1;
+        this.name = data[1];
+        this.author = data[2];
+        try{
+            this.year = format.parse(data[3]);
+        } catch (Exception e){
+            this.year = new Date(0L);
+        }
+        this.publishingHouse = data[4];
+        this.ISBN = data[5];
+        this.numberOfPages = Integer.valueOf(data[6]);
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeStringArray(new String[]{
+                String.valueOf(id),
+                name,
+                author,
+                String.valueOf(year),
+                publishingHouse,
+                ISBN,
+                String.valueOf(numberOfPages)
+        });
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Book> CREATOR = new Creator<Book>() {
+        @Override
+        public Book createFromParcel(Parcel parcel) {
+            return new Book(parcel);
+        }
+
+        @Override
+        public Book[] newArray(int i) {
+            return new Book[i];
+        }
+    };
 }
