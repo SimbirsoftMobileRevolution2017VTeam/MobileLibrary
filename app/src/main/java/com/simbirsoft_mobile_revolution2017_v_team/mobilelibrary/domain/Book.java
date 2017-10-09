@@ -28,6 +28,10 @@ public class Book implements Parcelable{
     public Book() {
     }
 
+    /**
+    * В таких случаях лучше использовать паттерн Builder
+    * иначе становится слишком много параметров и тяжело ориентироваться в них при создании объекта
+    */
     public Book(int id, String name, String author, Date year, String publishingHouse,
                 String ISBN, int numberOfPages, boolean isAvailable, boolean wasReaded,
                 boolean isFavourite) {

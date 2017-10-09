@@ -45,6 +45,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        // Можно еще добавить библиотеку ButterKnife
+        // для биндингов на UI
         public View view;
         public TextView textName;
         public TextView textAuthor;
