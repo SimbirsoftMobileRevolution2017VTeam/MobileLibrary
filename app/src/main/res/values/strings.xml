@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">MobileLibrary</string>
+    <string name="app_name">Мобильная библиотека</string>
 
-    <string name="books">Books</string>
-    <string name="favourites">Favourites</string>
+    <string name="all_books">Все книги</string>
+    <string name="favourites">Избранные</string>
     <string name="name">Название</string>
     <string name="author">Автор</string>
     <string name="year">Год</string>

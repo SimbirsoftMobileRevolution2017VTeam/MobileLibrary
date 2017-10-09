@@ -15,13 +15,19 @@ import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.fragments.Li
 public class LibraryFragment extends Fragment implements ListBooksFragment.OnListFragmentEventListener{
 
     public static final String BOOK_ID_ARGUMENT = "BOOK_ID";
+    public static final String BUNDLE_ID_ARGUMENT = "BUNDLE_ID";
 
     boolean mDualPane;
-    int mCurCheckPosition = 0;
+    Bundle arguments;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        if (savedInstanceState != null){
+            if (savedInstanceState.containsKey(BUNDLE_ID_ARGUMENT)){
+                arguments = savedInstanceState.getBundle(BUNDLE_ID_ARGUMENT);
+            }
+        }
         return inflater.inflate(R.layout.fragment_library, container, false);
     }
 
@@ -32,32 +38,42 @@ public class LibraryFragment extends Fragment implements ListBooksFragment.OnLis
         View detailsFrame = getActivity().findViewById(R.id.frame_for_detail_fragment);
         mDualPane = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
 
-        if (savedInstanceState != null) {
-            mCurCheckPosition = savedInstanceState.getInt("curChoice", 0);
-        }
+        showPreviousDetailInfo();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt("curChoice", mCurCheckPosition);
+        outState.putBundle(BUNDLE_ID_ARGUMENT, arguments);
     }
 
     @Override
     public void listFragmentEventTriggered(Book book) {
-        Bundle arguments = new Bundle();
+        arguments = new Bundle();
         arguments.putParcelable(BOOK_ID_ARGUMENT, book);
         if (mDualPane) {
-            BookDetailFragment fragment = new BookDetailFragment();
-            fragment.setArguments(arguments);
-            getChildFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.frame_for_detail_fragment, fragment)
-                    .commit();
+            createDetailFragment();
         } else{
             Intent intent = new Intent(getContext(), BookDetailActivity.class);
             intent.putExtras(arguments);
             getContext().startActivity(intent);
         }
+    }
+
+    private void showPreviousDetailInfo(){
+        if (arguments != null){
+            if (mDualPane) {
+                createDetailFragment();
+            }
+        }
+    }
+
+    private void createDetailFragment(){
+        BookDetailFragment fragment = new BookDetailFragment();
+        fragment.setArguments(arguments);
+        getChildFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame_for_detail_fragment, fragment)
+                .commit();
     }
 }
