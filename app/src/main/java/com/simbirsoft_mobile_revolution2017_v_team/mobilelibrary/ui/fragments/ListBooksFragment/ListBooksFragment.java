@@ -54,7 +54,7 @@ public class ListBooksFragment extends Fragment implements RecyclerViewAdapter.O
 
     @Override
     public void onDestroy() {
-        presenter.detachView();
+        presenter.detachView(); // этот код нужно перенести в onStop, т. к. onDestroy может не вызваться
         super.onDestroy();
     }
 

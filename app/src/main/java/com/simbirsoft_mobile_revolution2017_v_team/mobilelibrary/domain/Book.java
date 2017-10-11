@@ -127,6 +127,13 @@ public class Book implements Parcelable{
         isFavourite = favourite;
     }
 
+    /*
+     * Parcleable генерируют через AndroidStudio
+     * И там для определенных типов данных есть свои методы
+     * Имплементируете интерфейс, студия предлагает добавить методы (подкрашивает красным)
+     * Alt + Enter, добавляете методы
+     * Alt + Enter по названию класса, добавляете реализацию
+     */
     public Book(Parcel parcel){
         String[] data = new String[7];
         parcel.readStringArray(data);
