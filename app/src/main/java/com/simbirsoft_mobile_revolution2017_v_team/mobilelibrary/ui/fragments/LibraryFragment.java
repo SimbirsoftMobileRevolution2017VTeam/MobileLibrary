@@ -23,8 +23,12 @@ public class LibraryFragment extends Fragment implements ListBooksFragment.OnLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        /*
+        * Отступы по CodeStyle
+         */
         if (savedInstanceState != null){
-            if (savedInstanceState.containsKey(BUNDLE_ID_ARGUMENT)){
+            if (savedInstanceState.containsKey(BUNDLE_ID_ARGUMENT)){ // парсинг бандла лучше вынести в отдельный метод в onCreate()
+                // в этом методе уже лучше подготавливать View для отображения
                 arguments = savedInstanceState.getBundle(BUNDLE_ID_ARGUMENT);
             }
         }
@@ -69,7 +73,8 @@ public class LibraryFragment extends Fragment implements ListBooksFragment.OnLis
     }
 
     private void createDetailFragment(){
-        BookDetailFragment fragment = new BookDetailFragment();
+        BookDetailFragment fragment = new BookDetailFragment(); // создание фрагмента лучше делать в статическом методе
+        // BookDetailFragment.newInstance(arguments);
         fragment.setArguments(arguments);
         getChildFragmentManager()
                 .beginTransaction()

@@ -14,6 +14,7 @@ public class Book implements Parcelable{
 
     private final static SimpleDateFormat format = new SimpleDateFormat("yyyy");
 
+    //Придется поменять на String
     private int id;
     private String name;
     private String author;
@@ -127,6 +128,13 @@ public class Book implements Parcelable{
         isFavourite = favourite;
     }
 
+    /*
+     * Parcleable генерируют через AndroidStudio
+     * И там для определенных типов данных есть свои методы
+     * Имплементируете интерфейс, студия предлагает добавить методы (подкрашивает красным)
+     * Alt + Enter, добавляете методы
+     * Alt + Enter по названию класса, добавляете реализацию
+     */
     public Book(Parcel parcel){
         String[] data = new String[7];
         parcel.readStringArray(data);

@@ -31,7 +31,7 @@ public class BookDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_book_detail, container, false);
-        if (book != null) {
+        if (book != null) { // все же лучше создавать поля для View и инициализировать их в onCreateView
             ((TextView) rootView.findViewById(R.id.textView_name)).setText(book.getName());
             ((TextView) rootView.findViewById(R.id.textView_author)).setText(book.getAuthor());
             ((TextView) rootView.findViewById(R.id.textView_year)).setText(String.valueOf(Book.getFormat().format(book.getYear())));

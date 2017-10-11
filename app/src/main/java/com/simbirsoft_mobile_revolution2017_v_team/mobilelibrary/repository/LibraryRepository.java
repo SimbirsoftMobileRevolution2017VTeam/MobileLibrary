@@ -65,6 +65,7 @@ public class LibraryRepository implements IRepository {
         return books;
     }
 
+    // Нужно добавить локаль в DateFormat
     private Date createDateFromString(String year) {
         DateFormat dateformat = new SimpleDateFormat("yyyy");
         try {

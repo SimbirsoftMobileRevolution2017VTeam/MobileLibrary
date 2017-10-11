@@ -8,7 +8,7 @@ import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.view.ILibraryVi
 import java.util.List;
 
 /**
- * Created by Denis on 09.10.2017.
+ * Отступы по CodeStyle
  */
 
 public class LibraryPresenter {
