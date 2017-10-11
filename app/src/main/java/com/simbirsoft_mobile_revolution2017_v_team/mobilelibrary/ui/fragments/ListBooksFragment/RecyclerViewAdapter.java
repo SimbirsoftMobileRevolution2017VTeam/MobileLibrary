@@ -18,7 +18,7 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     public interface OnBookClickListener{
-        void onBookClicked(int bookId);
+        void onBookClicked(String bookId);
     }
 
     private List<Book> books;
@@ -37,7 +37,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public View view;
         public TextView textName;
         public TextView textAuthor;
-        public int bookId;
+        public String bookId;
         public OnBookClickListener bookClickListener;
 
         public ViewHolder(View v, OnBookClickListener abstractClickListener) {
@@ -45,7 +45,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             view = v;
             textName = v.findViewById(R.id.name);
             textAuthor = v.findViewById(R.id.author);
-            bookId = -1;
+            //bookId = -1;
             bookClickListener = abstractClickListener;
             v.setOnClickListener(this);
         }

@@ -3,6 +3,8 @@ package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -10,49 +12,60 @@ import java.util.Date;
  * Created by Denis on 03.10.2017.
  */
 
-public class Book implements Parcelable{
+public class Book implements Parcelable {
 
-    private final static SimpleDateFormat format = new SimpleDateFormat("yyyy");
+    @SerializedName("id")
+    private String id;
 
-    //Придется поменять на String
-    private int id;
+    @SerializedName("name")
     private String name;
+
+    @SerializedName("author")
     private String author;
+
+    @SerializedName("year")
     private Date year;
+
+    @SerializedName("publishingHouse")
     private String publishingHouse;
+
+    @SerializedName("ISBN")
     private String ISBN;
+
+    @SerializedName("numberOfPages")
     private int numberOfPages;
+
+    @SerializedName("isAvailable")
     private boolean isAvailable;
+
+    @SerializedName("wasReaded")
     private boolean wasReaded;
+
+    @SerializedName("isFavourite")
     private boolean isFavourite;
 
     public Book() {
     }
 
-    /**
-    * В таких случаях лучше использовать паттерн Builder
-    * иначе становится слишком много параметров и тяжело ориентироваться в них при создании объекта
-    */
-    public Book(int id, String name, String author, Date year, String publishingHouse,
-                String ISBN, int numberOfPages, boolean isAvailable, boolean wasReaded,
-                boolean isFavourite) {
-        this.id = id;
-        this.name = name;
-        this.author = author;
-        this.year = year;
-        this.publishingHouse = publishingHouse;
-        this.ISBN = ISBN;
-        this.numberOfPages = numberOfPages;
-        this.isAvailable = isAvailable;
-        this.wasReaded = wasReaded;
-        this.isFavourite = isFavourite;
+    private final static SimpleDateFormat format = new SimpleDateFormat("yyyy");
+
+    public Book(BookBuilder bookBuilder) {
+        this.name = bookBuilder.getName();
+        this.author = bookBuilder.getAuthor();
+        this.year = bookBuilder.getYear();
+        this.publishingHouse = bookBuilder.getPublishingHouse();
+        this.ISBN = bookBuilder.getISBN();
+        this.numberOfPages = bookBuilder.getNumberOfPages();
+        this.isAvailable = bookBuilder.isAvailable();
+        this.wasReaded = bookBuilder.isWasReaded();
+        this.isFavourite = bookBuilder.isFavourite();
     }
 
-    public static SimpleDateFormat getFormat(){
+    public static SimpleDateFormat getFormat() {
         return format;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -135,15 +148,14 @@ public class Book implements Parcelable{
      * Alt + Enter, добавляете методы
      * Alt + Enter по названию класса, добавляете реализацию
      */
-    public Book(Parcel parcel){
+    public Book(Parcel parcel) {
         String[] data = new String[7];
         parcel.readStringArray(data);
-        this.id = -1;
         this.name = data[1];
         this.author = data[2];
-        try{
+        try {
             this.year = format.parse(data[3]);
-        } catch (Exception e){
+        } catch (Exception e) {
             this.year = new Date(0L);
         }
         this.publishingHouse = data[4];
@@ -154,7 +166,7 @@ public class Book implements Parcelable{
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeStringArray(new String[]{
-                String.valueOf(id),
+                id,
                 name,
                 author,
                 String.valueOf(year),

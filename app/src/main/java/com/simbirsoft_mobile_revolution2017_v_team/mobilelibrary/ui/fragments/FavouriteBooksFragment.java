@@ -40,7 +40,7 @@ public class FavouriteBooksFragment extends Fragment implements RecyclerViewAdap
     }
 
     @Override
-    public void onBookClicked(int bookId) {
+    public void onBookClicked(String bookId) {
         // строки все же лучше стараться всегда брать из ресурсов
         Toast.makeText(getActivity().getApplicationContext(),"favourite " + bookId, Toast.LENGTH_SHORT).show();
     }
@@ -70,6 +70,11 @@ public class FavouriteBooksFragment extends Fragment implements RecyclerViewAdap
 
     @Override
     public void onDataCreated(List<Book> library) {
+
+    }
+
+    @Override
+    public void showError() {
 
     }
 }

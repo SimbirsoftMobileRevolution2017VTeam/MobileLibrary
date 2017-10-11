@@ -59,7 +59,7 @@ public class ListBooksFragment extends Fragment implements RecyclerViewAdapter.O
     }
 
     @Override
-    public void onBookClicked(int bookId) {
+    public void onBookClicked(String bookId) {
         Toast.makeText(getActivity().getApplicationContext(),"library " + bookId, Toast.LENGTH_SHORT).show();
         presenter.loadBook(bookId);
         parentFragment.listFragmentEventTriggered(bookInfo);
@@ -78,5 +78,10 @@ public class ListBooksFragment extends Fragment implements RecyclerViewAdapter.O
     @Override
     public void onDataCreated(List<Book> library) {
         //additional event for something
+    }
+
+    @Override
+    public void showError() {
+
     }
 }
