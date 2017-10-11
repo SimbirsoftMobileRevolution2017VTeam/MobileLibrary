@@ -14,6 +14,7 @@ public class Book implements Parcelable{
 
     private final static SimpleDateFormat format = new SimpleDateFormat("yyyy");
 
+    //Придется поменять на String
     private int id;
     private String name;
     private String author;
