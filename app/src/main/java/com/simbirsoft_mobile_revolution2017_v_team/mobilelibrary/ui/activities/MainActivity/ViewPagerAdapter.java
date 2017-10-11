@@ -1,22 +1,22 @@
-package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.adapters;
+package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.activities.MainActivity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
-
+import java.util.ArrayList;
 /**
  * Created by Olegka on 04.10.2017.
  */
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
-    /**
-     * Адаптер и создание фрагментов можно реализовать при помощи enum'ов
-     */
 
-    /*private enum GiftsTab {
+    /**
+    * Адаптер и создание фрагментов можно реализовать при помощи enum'ов
+    */
+    /*
+     private enum GiftsTab {
         ACTIVE(R.string.my),
         INACTIVE(R.string.sent);
 
@@ -29,11 +29,12 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         public int getTitleId() {
             return titleId;
         }
-    }*/
+    }
+    */
 
     /**
-     * Создание фрагмента
-     */
+    * Создание фрагмента
+    */
     /*
     @Override
     public Fragment getItem(int position) {
@@ -48,8 +49,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
                 throw new IllegalStateException();
         }
     }
-     */
-
+    */
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
 

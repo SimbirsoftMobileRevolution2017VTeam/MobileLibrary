@@ -1,8 +1,10 @@
-package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui;
+package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.activities;
 
 import android.content.res.Configuration;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+
+import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.fragments.BookDetailFragment;
 
 public class BookDetailActivity extends FragmentActivity {
 

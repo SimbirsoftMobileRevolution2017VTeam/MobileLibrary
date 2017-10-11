@@ -1,4 +1,4 @@
-package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui;
+package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

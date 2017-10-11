@@ -1,4 +1,4 @@
-package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui;
+package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.activities.MainActivity;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -7,7 +7,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.R;
-import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.adapters.ViewPagerAdapter;
+import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.fragments.FavouriteBooksFragment;
+import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.fragments.LibraryFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,9 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new LibraryFragment(), "Books");
-        adapter.addFragment(new FavouriteBooksFragment(), "Favorites");
+        adapter.addFragment(new LibraryFragment(), getResources().getString(R.string.all_books));
+        adapter.addFragment(new FavouriteBooksFragment(), getResources().getString(R.string.favourites));
         viewPager.setAdapter(adapter);
     }
-
 }

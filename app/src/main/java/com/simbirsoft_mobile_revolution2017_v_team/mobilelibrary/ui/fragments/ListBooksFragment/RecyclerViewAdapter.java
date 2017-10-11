@@ -1,18 +1,14 @@
-package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.adapters;
+package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.fragments.ListBooksFragment;
 
-import android.support.v7.util.DiffUtil;
+import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.R;
+import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Book;
+
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.R;
-import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Book;
-import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.FragmentType;
-import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.LibraryDiffCallback;
-
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -29,25 +25,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private OnBookClickListener adapterClickListener;
 
-    public RecyclerViewAdapter(List<Book> books, FragmentType type, OnBookClickListener adapterClickListener) {
+    public RecyclerViewAdapter(List<Book> books, OnBookClickListener adapterClickListener) {
         this.books = books;
         this.adapterClickListener = adapterClickListener;
-        switch(type){
-            case Library: {
-                return;
-            }
-            case FavouriteBooks: {
-                filterFavouriteBooks();
-                return;
-            }
-        }
     }
 
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         // Можно еще добавить библиотеку ButterKnife
         // для биндингов на UI
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
         public View view;
         public TextView textName;
         public TextView textAuthor;
@@ -90,24 +76,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public int getItemCount() {
         return books.size();
-    }
-
-    private void filterFavouriteBooks(){
-        Iterator<Book> iterator = books.iterator();
-        while(iterator.hasNext()) {
-            Book next = iterator.next();
-            if(!next.isFavourite()) {
-                iterator.remove();
-            }
-        }
-        updateLibraryListItems(books);
-    }
-
-    private void updateLibraryListItems(List<Book> library) {
-        final LibraryDiffCallback diffCallback = new LibraryDiffCallback(library, this.books);
-        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
-
-        this.books = library;
-        diffResult.dispatchUpdatesTo(this);
     }
 }
