@@ -12,7 +12,7 @@ import java.util.Date;
  * Created by Denis on 03.10.2017.
  */
 
-public class Book implements Parcelable {
+public class Book {
 
     @SerializedName("id")
     private String id;
@@ -148,48 +148,4 @@ public class Book implements Parcelable {
      * Alt + Enter, добавляете методы
      * Alt + Enter по названию класса, добавляете реализацию
      */
-    public Book(Parcel parcel) {
-        String[] data = new String[7];
-        parcel.readStringArray(data);
-        this.name = data[1];
-        this.author = data[2];
-        try {
-            this.year = format.parse(data[3]);
-        } catch (Exception e) {
-            this.year = new Date(0L);
-        }
-        this.publishingHouse = data[4];
-        this.ISBN = data[5];
-        this.numberOfPages = Integer.valueOf(data[6]);
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeStringArray(new String[]{
-                id,
-                name,
-                author,
-                String.valueOf(year),
-                publishingHouse,
-                ISBN,
-                String.valueOf(numberOfPages)
-        });
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public static final Creator<Book> CREATOR = new Creator<Book>() {
-        @Override
-        public Book createFromParcel(Parcel parcel) {
-            return new Book(parcel);
-        }
-
-        @Override
-        public Book[] newArray(int i) {
-            return new Book[i];
-        }
-    };
 }

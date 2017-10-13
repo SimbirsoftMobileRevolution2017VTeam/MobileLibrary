@@ -12,5 +12,5 @@ public interface ILibraryView {
     void onDataReceived(List<Book> library);
     void onDataReceived(Book book);
     void onDataCreated(List<Book> library);
-    void showError();
+    void onError();
 }

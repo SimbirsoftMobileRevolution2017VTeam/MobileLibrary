@@ -74,7 +74,7 @@ public class FavouriteBooksFragment extends Fragment implements RecyclerViewAdap
     }
 
     @Override
-    public void showError() {
+    public void onError() {
 
     }
 }

@@ -81,7 +81,7 @@ public class ListBooksFragment extends Fragment implements RecyclerViewAdapter.O
     }
 
     @Override
-    public void showError() {
+    public void onError() {
 
     }
 }

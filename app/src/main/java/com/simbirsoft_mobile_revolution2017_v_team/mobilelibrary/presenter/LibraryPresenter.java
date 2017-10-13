@@ -7,7 +7,6 @@ import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.repository.Libr
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.view.ILibraryView;
 
 import java.util.Date;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -33,7 +32,7 @@ public class LibraryPresenter {
                             }
                         }, throwable -> {
                             if (view != null) {
-                                view.showError();
+                                view.onError();
                             }
                         }
                 );
@@ -66,7 +65,7 @@ public class LibraryPresenter {
                             }
                         }, throwable -> {
                             if (view != null) {
-                                view.showError();
+                                view.onError();
                             }
                         }
                 );
@@ -82,7 +81,7 @@ public class LibraryPresenter {
                             }
                         }, throwable -> {
                             if (view != null) {
-                                view.showError();
+                                view.onError();
                             }
                         }
                 );
@@ -98,7 +97,7 @@ public class LibraryPresenter {
                             }
                         }, throwable -> {
                             if (view != null) {
-                                view.showError();
+                                view.onError();
                             }
                         }
                 );
