@@ -26,15 +26,12 @@ public class LibraryPresenter {
         libraryRepository.getBooks()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(books -> {
-                            if (view != null) {
-                                view.onDataReceived(books);
-                            }
-                        }, throwable -> {
-                            if (view != null) {
-                                view.onError();
-                            }
+                .subscribe(
+                    books -> {
+                        if (view != null) {
+                            view.onDataReceived(books);
                         }
+                    }
                 );
 
     }
@@ -65,39 +62,27 @@ public class LibraryPresenter {
                             }
                         }, throwable -> {
                             if (view != null) {
-                                view.onError();
+                                view.onError(throwable);
                             }
                         }
                 );
     }
 
     public void loadFavourites() {
-        libraryRepository.getBooks()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(books -> {
-                            if (view != null) {
-                                view.onDataReceived(books.stream().filter(book -> book.isFavourite() == true).collect(Collectors.<Book>toList()));
-                            }
-                        }, throwable -> {
-                            if (view != null) {
-                                view.onError();
-                            }
-                        }
-                );
+
     }
 
     public void loadBook(String id) {
-        libraryRepository.getBooks()
+        libraryRepository.getBookById(id)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(books -> {
+                .subscribe(book -> {
                             if (view != null) {
-                                view.onDataReceived(books.stream().filter(book -> book.getId() == id).findAny().orElse(null));
+                                view.onDataReceived(book);
                             }
                         }, throwable -> {
                             if (view != null) {
-                                view.onError();
+                                view.onError(throwable);
                             }
                         }
                 );

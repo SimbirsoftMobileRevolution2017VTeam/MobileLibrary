@@ -103,7 +103,7 @@ public class BookDetailFragment extends Fragment implements ILibraryView {
     }
 
     @Override
-    public void onError() {
+    public void onError(Throwable error) {
 
     }
 

@@ -1,6 +1,7 @@
 package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.services;
 
-import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.api.AccessInterface;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -12,16 +13,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by Olegka on 11.10.2017.
  */
 
-public class RestSreviceProvider {
+public class RestServiceProvider {
 
-    private static final RestSreviceProvider INSTANCE = new RestSreviceProvider();
+    private static final RestServiceProvider INSTANCE = new RestServiceProvider();
 
     private RestService restService;
 
-    private RestSreviceProvider() {
+    private RestServiceProvider() {
+
     }
 
-    public static RestSreviceProvider newInstance() {
+    public static RestServiceProvider getInstance() {
         return INSTANCE;
     }
 
@@ -34,10 +36,12 @@ public class RestSreviceProvider {
 
     private RestService createRestService() {
 
+        Gson gson = new GsonBuilder().setLenient().create();
+
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(restService.Base_URL)
+                .baseUrl(RestService.Base_URL)
                 .client(provideClient())
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 

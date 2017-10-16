@@ -81,7 +81,7 @@ public class ListBooksFragment extends Fragment implements RecyclerViewAdapter.O
     }
 
     @Override
-    public void onError() {
-
+    public void onError(Throwable error) {
+        Toast.makeText(getActivity().getApplicationContext(),"library fail " + String.valueOf(error), Toast.LENGTH_LONG).show();
     }
 }

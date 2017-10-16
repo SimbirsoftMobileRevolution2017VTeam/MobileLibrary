@@ -21,33 +21,33 @@ public interface RestService {
 
     @Headers({
             "X-Api-Factory-Application-Id:59ddb9baa4be20586d260ea1",
-            "Authorization: Basic NTlkZGI5YmFhNGJlMjA1ODZkMjYwZWExOjUzOWRiOTdkNmQ=",
+            "Authorization:Basic NTlkZGI5YmFhNGJlMjA1ODZkMjYwZWExOjUzOWRiOTdkNmQ=",
             "Content-Type:application/json"
     })
-    @GET("db/Book")
+    @GET("/db/book")
     Observable<BaseResponse<List<Book>>> getBooks();
 
     @Headers({
             "X-Api-Factory-Application-Id:59ddb9baa4be20586d260ea1",
-            "Authorization: Basic NTlkZGI5YmFhNGJlMjA1ODZkMjYwZWExOjUzOWRiOTdkNmQ=",
+            "Authorization:Basic NTlkZGI5YmFhNGJlMjA1ODZkMjYwZWExOjUzOWRiOTdkNmQ=",
             "Content-Type:application/json"
     })
-    @POST("db/Book")
+    @POST("/db/book")
     Observable<BaseResponse<Book>> addBook(@Body Book book);
 
     @Headers({
             "X-Api-Factory-Application-Id:59ddb9baa4be20586d260ea1",
-            "Authorization: Basic NTlkZGI5YmFhNGJlMjA1ODZkMjYwZWExOjUzOWRiOTdkNmQ=",
+            "Authorization:Basic NTlkZGI5YmFhNGJlMjA1ODZkMjYwZWExOjUzOWRiOTdkNmQ=",
             "Content-Type:application/json"
     })
-    @GET("db/Book/{id}")
+    @GET("/db/book/{id}")
     Observable<BaseResponse<Book>> getBook(@Path("id") String id);
 
     @Headers({
             "X-Api-Factory-Application-Id:59ddb9baa4be20586d260ea1",
-            "Authorization: Basic NTlkZGI5YmFhNGJlMjA1ODZkMjYwZWExOjUzOWRiOTdkNmQ=",
+            "Authorization:Basic NTlkZGI5YmFhNGJlMjA1ODZkMjYwZWExOjUzOWRiOTdkNmQ=",
             "Content-Type:application/json"
     })
-    @GET("db/Book/{isFavourite}")
+    @GET("/db/book/{isFavourite}")
     Observable<BaseResponse<List<Book>>> getFavouriteBooks(@Path("isFavourite") boolean isFavourite);
 }
