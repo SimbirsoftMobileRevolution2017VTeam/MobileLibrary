@@ -20,7 +20,6 @@ xmlns:android="http://schemas.android.com/apk/res/android">
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:layout_margin="10dp"
-        android:text="TextView"
         android:textAlignment="textEnd" />
 
     <TextView
@@ -40,7 +39,6 @@ xmlns:android="http://schemas.android.com/apk/res/android">
         android:layout_alignParentEnd="true"
         android:layout_below="@id/textView_name"
         android:layout_margin="10dp"
-        android:text="TextView"
         android:textAlignment="textEnd" />
 
     <TextView
@@ -60,7 +58,6 @@ xmlns:android="http://schemas.android.com/apk/res/android">
         android:layout_alignParentEnd="true"
         android:layout_below="@id/textView_author"
         android:layout_margin="10dp"
-        android:text="TextView"
         android:textAlignment="textEnd" />
 
     <TextView
@@ -80,7 +77,6 @@ xmlns:android="http://schemas.android.com/apk/res/android">
         android:layout_alignParentEnd="true"
         android:layout_below="@id/textView_year"
         android:layout_margin="10dp"
-        android:text="TextView"
         android:textAlignment="textEnd" />
 
     <TextView
@@ -100,7 +96,6 @@ xmlns:android="http://schemas.android.com/apk/res/android">
         android:layout_alignParentEnd="true"
         android:layout_below="@id/textView_publishingHouse"
         android:layout_margin="10dp"
-        android:text="TextView"
         android:textAlignment="textEnd" />
 
     <TextView
@@ -120,7 +115,6 @@ xmlns:android="http://schemas.android.com/apk/res/android">
         android:layout_alignParentEnd="true"
         android:layout_below="@id/textView_ISBN"
         android:layout_margin="10dp"
-        android:text="TextView"
         android:textAlignment="textEnd" />
 
 </RelativeLayout>

@@ -22,6 +22,11 @@ public class LibraryRepository implements IRepository {
     }
 
     @Override
+    public Observable<List<Book>> getFavouriteBooks() {
+        return RestServiceProvider.getInstance().getRestService().getFavouriteBooks(true).map(BaseResponse::getData);
+    }
+
+    @Override
     public Observable<Book> addBook(Book book) {
         return RestServiceProvider.getInstance().getRestService().addBook(book).map(BaseResponse::getData);
     }

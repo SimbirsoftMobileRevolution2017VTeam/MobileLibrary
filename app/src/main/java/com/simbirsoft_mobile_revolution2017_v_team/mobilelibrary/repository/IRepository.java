@@ -13,11 +13,9 @@ import io.reactivex.Observable;
 public interface IRepository {
 
     Observable<List<Book>> getBooks();
+    Observable<List<Book>> getFavouriteBooks();
     Observable<Book> addBook(Book book);
     Observable<Book> getBookById(String id);
-
-    //Observable<List<Book>> getFavouriteBooks();
-    //Book getBookWithId(int id);
 }
 
 

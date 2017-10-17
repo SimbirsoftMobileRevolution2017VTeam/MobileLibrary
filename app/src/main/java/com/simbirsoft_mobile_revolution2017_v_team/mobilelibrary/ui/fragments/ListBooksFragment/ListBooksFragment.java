@@ -20,11 +20,9 @@ import java.util.List;
 public class ListBooksFragment extends Fragment implements RecyclerViewAdapter.OnBookClickListener, ILibraryView {
 
     public interface OnListFragmentEventListener{
-        void listFragmentEventTriggered(Book book);
+        void listFragmentEventTriggered(String bookId);
     }
 
-    private List<Book> library = new ArrayList<>();
-    private Book bookInfo = new Book();
     private LibraryPresenter presenter = new LibraryPresenter();
     private OnListFragmentEventListener parentFragment;
     private RecyclerView mRecyclerView;
@@ -49,7 +47,6 @@ public class ListBooksFragment extends Fragment implements RecyclerViewAdapter.O
     public void onStart() {
         super.onStart();
         presenter.loadLibrary();
-        mRecyclerView.setAdapter(new RecyclerViewAdapter(library, this));
     }
 
     @Override
@@ -61,18 +58,18 @@ public class ListBooksFragment extends Fragment implements RecyclerViewAdapter.O
     @Override
     public void onBookClicked(String bookId) {
         Toast.makeText(getActivity().getApplicationContext(),"library " + bookId, Toast.LENGTH_SHORT).show();
-        presenter.loadBook(bookId);
-        parentFragment.listFragmentEventTriggered(bookInfo);
+        parentFragment.listFragmentEventTriggered(bookId);
+
     }
 
     @Override
     public void onDataReceived(List<Book> library) {
-        this.library = library;
+        mRecyclerView.setAdapter(new RecyclerViewAdapter(library, this));
     }
 
     @Override
     public void onDataReceived(Book book) {
-        this.bookInfo = book;
+
     }
 
     @Override

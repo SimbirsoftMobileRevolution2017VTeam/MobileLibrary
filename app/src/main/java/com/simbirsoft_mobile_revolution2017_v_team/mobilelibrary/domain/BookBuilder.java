@@ -1,7 +1,5 @@
 package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain;
 
-import java.util.Date;
-
 /**
  * Created by Olegka on 12.10.2017.
  */
@@ -11,7 +9,7 @@ public class BookBuilder {
     private String id;
     private String name;
     private String author;
-    private Date year;
+    private long year;
     private String publishingHouse;
     private String ISBN;
     private int numberOfPages;
@@ -34,7 +32,7 @@ public class BookBuilder {
         return this;
     }
 
-    public BookBuilder year(Date year) {
+    public BookBuilder year(long year) {
         this.year = year;
         return this;
     }
@@ -73,6 +71,10 @@ public class BookBuilder {
         return new Book(this);
     }
 
+    public String getId(){
+        return id;
+    }
+
     public String getName() {
         return name;
     }
@@ -81,7 +83,7 @@ public class BookBuilder {
         return author;
     }
 
-    public Date getYear() {
+    public long getYear() {
         return year;
     }
 

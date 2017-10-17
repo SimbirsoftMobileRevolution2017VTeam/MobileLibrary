@@ -1,12 +1,8 @@
 package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by Denis on 03.10.2017.
@@ -24,7 +20,7 @@ public class Book {
     private String author;
 
     @SerializedName("year")
-    private Date year;
+    private long year;
 
     @SerializedName("publishingHouse")
     private String publishingHouse;
@@ -50,6 +46,7 @@ public class Book {
     private final static SimpleDateFormat format = new SimpleDateFormat("yyyy");
 
     public Book(BookBuilder bookBuilder) {
+        this.id = bookBuilder.getId();
         this.name = bookBuilder.getName();
         this.author = bookBuilder.getAuthor();
         this.year = bookBuilder.getYear();
@@ -85,11 +82,11 @@ public class Book {
         this.author = author;
     }
 
-    public Date getYear() {
+    public long getYear() {
         return year;
     }
 
-    public void setYear(Date year) {
+    public void setYear(long year) {
         this.year = year;
     }
 

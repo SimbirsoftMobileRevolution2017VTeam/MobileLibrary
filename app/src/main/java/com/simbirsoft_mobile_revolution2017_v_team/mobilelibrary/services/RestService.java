@@ -10,6 +10,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by Olegka on 11.10.2017.
@@ -24,7 +25,7 @@ public interface RestService {
             "Authorization:Basic NTlkZGI5YmFhNGJlMjA1ODZkMjYwZWExOjUzOWRiOTdkNmQ=",
             "Content-Type:application/json"
     })
-    @GET("/db/book")
+    @GET("db/book")
     Observable<BaseResponse<List<Book>>> getBooks();
 
     @Headers({
@@ -32,7 +33,7 @@ public interface RestService {
             "Authorization:Basic NTlkZGI5YmFhNGJlMjA1ODZkMjYwZWExOjUzOWRiOTdkNmQ=",
             "Content-Type:application/json"
     })
-    @POST("/db/book")
+    @POST("db/book")
     Observable<BaseResponse<Book>> addBook(@Body Book book);
 
     @Headers({
@@ -40,7 +41,7 @@ public interface RestService {
             "Authorization:Basic NTlkZGI5YmFhNGJlMjA1ODZkMjYwZWExOjUzOWRiOTdkNmQ=",
             "Content-Type:application/json"
     })
-    @GET("/db/book/{id}")
+    @GET("db/book/{id}")
     Observable<BaseResponse<Book>> getBook(@Path("id") String id);
 
     @Headers({
@@ -48,6 +49,6 @@ public interface RestService {
             "Authorization:Basic NTlkZGI5YmFhNGJlMjA1ODZkMjYwZWExOjUzOWRiOTdkNmQ=",
             "Content-Type:application/json"
     })
-    @GET("/db/book/{isFavourite}")
-    Observable<BaseResponse<List<Book>>> getFavouriteBooks(@Path("isFavourite") boolean isFavourite);
+    @GET("db/book/")
+    Observable<BaseResponse<List<Book>>> getFavouriteBooks(@Query("isFavourite") boolean isFavourite);
 }

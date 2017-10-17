@@ -49,7 +49,6 @@ public class FavouriteBooksFragment extends Fragment implements RecyclerViewAdap
     public void onStart() {
         super.onStart();
         presenter.loadFavourites();
-        mRecyclerView.setAdapter(new RecyclerViewAdapter(this.library, this));
     }
 
     @Override
@@ -61,6 +60,7 @@ public class FavouriteBooksFragment extends Fragment implements RecyclerViewAdap
     @Override
     public void onDataReceived(List<Book> library) {
         this.library = library;
+        mRecyclerView.setAdapter(new RecyclerViewAdapter(this.library, this));
     }
 
     @Override
@@ -75,6 +75,6 @@ public class FavouriteBooksFragment extends Fragment implements RecyclerViewAdap
 
     @Override
     public void onError(Throwable error) {
-
+        Toast.makeText(getActivity().getApplicationContext(),"favourite fail " + String.valueOf(error), Toast.LENGTH_LONG).show();
     }
 }

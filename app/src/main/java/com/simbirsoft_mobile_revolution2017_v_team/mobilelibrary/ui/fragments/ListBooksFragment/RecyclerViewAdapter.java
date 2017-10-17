@@ -45,7 +45,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             view = v;
             textName = v.findViewById(R.id.name);
             textAuthor = v.findViewById(R.id.author);
-            //bookId = -1;
+            bookId = "-1";
             bookClickListener = abstractClickListener;
             v.setOnClickListener(this);
         }

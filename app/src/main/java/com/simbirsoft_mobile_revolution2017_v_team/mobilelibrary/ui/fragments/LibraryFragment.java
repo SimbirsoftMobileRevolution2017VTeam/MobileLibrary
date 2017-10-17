@@ -2,14 +2,12 @@ package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.R;
-import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Book;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.activities.BookDetailActivity;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.fragments.ListBooksFragment.ListBooksFragment;
 
@@ -32,12 +30,15 @@ public class LibraryFragment extends Fragment implements ListBooksFragment.OnLis
 
         View detailsFrame = getActivity().findViewById(R.id.frame_for_detail_fragment);
         mDualPane = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
+
+        showDetailForPreviousBook();
+
     }
 
     @Override
-    public void listFragmentEventTriggered(Book book) {
+    public void listFragmentEventTriggered(String bookId) {
         arguments = new Bundle();
-        arguments.putString(BOOK_ID_ARGUMENT, book.getId());
+        arguments.putString(BOOK_ID_ARGUMENT, bookId);
         if (mDualPane) {
             createDetailFragment();
         } else{
@@ -52,5 +53,11 @@ public class LibraryFragment extends Fragment implements ListBooksFragment.OnLis
                 .beginTransaction()
                 .replace(R.id.frame_for_detail_fragment, BookDetailFragment.newInstance(arguments))
                 .commit();
+    }
+
+    private void showDetailForPreviousBook(){
+        if (mDualPane) {
+            createDetailFragment();
+        }
     }
 }

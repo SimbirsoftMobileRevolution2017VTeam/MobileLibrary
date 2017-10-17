@@ -17,6 +17,7 @@ import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.view.ILibraryVi
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class BookDetailFragment extends Fragment implements ILibraryView {
 
@@ -31,17 +32,22 @@ public class BookDetailFragment extends Fragment implements ILibraryView {
     private Book book;
     private LibraryPresenter presenter = new LibraryPresenter();
 
-    @BindView(R.id.textView_name) TextView tvName;
-    @BindView(R.id.textView_author) TextView tvAuthor;
-    @BindView(R.id.textView_year) TextView tvYear;
-    @BindView(R.id.textView_publishingHouse) TextView tvPublishingHouse;
-    @BindView(R.id.textView_ISBN) TextView tvISBN;
-    @BindView(R.id.textView_numberOfPages) TextView tvNumberOfPages;
+    @BindView(R.id.textView_name)
+    TextView tvName;
+    @BindView(R.id.textView_author)
+    TextView tvAuthor;
+    @BindView(R.id.textView_year)
+    TextView tvYear;
+    @BindView(R.id.textView_publishingHouse)
+    TextView tvPublishingHouse;
+    @BindView(R.id.textView_ISBN)
+    TextView tvISBN;
+    @BindView(R.id.textView_numberOfPages)
+    TextView tvNumberOfPages;
 
     public static BookDetailFragment newInstance(Bundle arguments) {
-        Bundle args = arguments;
         BookDetailFragment fragment = new BookDetailFragment();
-        fragment.setArguments(args);
+        fragment.setArguments(arguments);
         return fragment;
     }
 
@@ -51,7 +57,7 @@ public class BookDetailFragment extends Fragment implements ILibraryView {
 
         presenter.attachView(this);
 
-        if (getArguments().containsKey(LibraryFragment.BOOK_ID_ARGUMENT)) {
+        if ((getArguments() != null) && (getArguments().containsKey(LibraryFragment.BOOK_ID_ARGUMENT))) {
             currentBookId = getArguments().getString(LibraryFragment.BOOK_ID_ARGUMENT);
             savePreviousBook();
         } else {
@@ -63,22 +69,16 @@ public class BookDetailFragment extends Fragment implements ILibraryView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_book_detail, container, false);
-        if (book != null) {
-            tvName.setText(book.getName());
-            tvAuthor.setText(book.getAuthor());
-            tvYear.setText(String.valueOf(Book.getFormat().format(book.getYear())));
-            tvPublishingHouse.setText(book.getPublishingHouse());
-            tvISBN.setText(book.getISBN());
-            tvNumberOfPages.setText(String.valueOf(book.getNumberOfPages()));
-        }
-
+        ButterKnife.bind(this, rootView);
         return rootView;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        presenter.loadBook(currentBookId);
+        if (currentBookId != null) {
+            presenter.loadBook(currentBookId);
+        }
     }
 
     @Override
@@ -95,6 +95,9 @@ public class BookDetailFragment extends Fragment implements ILibraryView {
     @Override
     public void onDataReceived(Book book) {
         this.book = book;
+        this.currentBookId = book.getId();
+        savePreviousBook();
+        fillContent();
     }
 
     @Override
@@ -107,16 +110,31 @@ public class BookDetailFragment extends Fragment implements ILibraryView {
 
     }
 
-    private void savePreviousBook(){
+    private void fillContent() {
+        if (book != null) {
+            tvName.setText(book.getName());
+            tvAuthor.setText(book.getAuthor());
+            tvYear.setText(String.valueOf(Book.getFormat().format(book.getYear())));
+            tvPublishingHouse.setText(book.getPublishingHouse());
+            tvISBN.setText(book.getISBN());
+            tvNumberOfPages.setText(String.valueOf(book.getNumberOfPages()));
+        }
+    }
+
+    private void savePreviousBook() {
         SharedPreferences preferences = getContext().getSharedPreferences(DETAIL_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(CURRENT_BOOK_ID_ARGUMENT, this.currentBookId);
-        editor.commit();
+        editor.apply();
     }
 
-    private void loadPreviousBook(){
-        SharedPreferences preferences =getContext().getSharedPreferences(DETAIL_PREFERENCES, Context.MODE_PRIVATE);
-        this.currentBookId = preferences.getString(CURRENT_BOOK_ID_ARGUMENT, "");
+    private void loadPreviousBook() {
+        SharedPreferences preferences = getContext().getSharedPreferences(DETAIL_PREFERENCES, Context.MODE_PRIVATE);
+        if (preferences.contains(CURRENT_BOOK_ID_ARGUMENT)) {
+            this.currentBookId = preferences.getString(CURRENT_BOOK_ID_ARGUMENT, "");
+        } else {
+            this.currentBookId = null;
+        }
     }
 }
 
