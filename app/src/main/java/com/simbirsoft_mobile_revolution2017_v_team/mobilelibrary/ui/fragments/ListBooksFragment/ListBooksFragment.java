@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.loopeer.itemtouchhelperextension.ItemTouchHelperExtension;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.R;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Book;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.presenter.LibraryPresenter;
@@ -40,6 +41,7 @@ public class ListBooksFragment extends Fragment implements RecyclerViewAdapter.O
         View view = inflater.inflate(R.layout.fragment_list_books, container, false);
         unbinder = ButterKnife.bind(this, view);
 
+
         parentFragment = (OnListFragmentEventListener)getParentFragment();
 
         mRecyclerView.setHasFixedSize(true);
@@ -66,7 +68,11 @@ public class ListBooksFragment extends Fragment implements RecyclerViewAdapter.O
 
     @Override
     public void onDataReceived(List<Book> library) {
-        mRecyclerView.setAdapter(new RecyclerViewAdapter(library, this));
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(library, this);
+        mRecyclerView.setAdapter(adapter);
+        ItemTouchHelperCallback mCallback = new ItemTouchHelperCallback(adapter);
+        ItemTouchHelperExtension mItemTouchHelper = new ItemTouchHelperExtension(mCallback);
+        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
     }
 
     @Override
