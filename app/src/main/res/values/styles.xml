@@ -8,4 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="DownUpActivity" parent="android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/push_from_left</item>
+        <item name="android:activityOpenExitAnimation">@anim/pull_to_right</item>
+        <item name="android:activityCloseExitAnimation">@anim/pull_to_right</item>
+        <item name="android:activityCloseEnterAnimation">@anim/push_from_left</item>
+    </style>
+
 </resources>

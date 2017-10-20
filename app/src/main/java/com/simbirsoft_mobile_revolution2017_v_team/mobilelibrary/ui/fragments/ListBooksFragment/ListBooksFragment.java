@@ -49,11 +49,6 @@ public class ListBooksFragment extends Fragment implements RecyclerViewAdapter.O
         presenter.loadLibrary();
     }
 
-    @Override
-    public void onDestroy() {
-        presenter.detachView(); // этот код нужно перенести в onStop, т. к. onDestroy может не вызваться
-        super.onDestroy();
-    }
 
     @Override
     public void onBookClicked(String bookId) {
@@ -75,6 +70,17 @@ public class ListBooksFragment extends Fragment implements RecyclerViewAdapter.O
     @Override
     public void onDataCreated(List<Book> library) {
         //additional event for something
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        presenter.detachView();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     @Override

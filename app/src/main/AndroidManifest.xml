@@ -17,8 +17,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            android:theme="@style/AnimationActivity">
         </activity>
-        <activity android:name=".ui.activities.BookDetailActivity"></activity>
+        <activity android:name=".ui.activities.BookDetailActivity">
+            android:theme="@style/AnimationActivity">
+        </activity>
     </application>
 
 </manifest>

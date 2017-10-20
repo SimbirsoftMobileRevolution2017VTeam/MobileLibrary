@@ -82,8 +82,13 @@ public class BookDetailFragment extends Fragment implements ILibraryView {
     }
 
     @Override
-    public void onDestroy() {
+    public void onStop() {
+        super.onStop();
         presenter.detachView();
+    }
+
+    @Override
+    public void onDestroy() {
         super.onDestroy();
     }
 

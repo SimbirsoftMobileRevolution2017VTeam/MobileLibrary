@@ -29,8 +29,7 @@ public class FavouriteBooksFragment extends Fragment implements RecyclerViewAdap
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favourite_books, container, false);
 
-        //layout'ы лучше именовать under_score rv_favourite
-        mRecyclerView = view.findViewById(R.id.rvFavourite);
+        mRecyclerView = view.findViewById(R.id.rv_Favourite);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -52,8 +51,13 @@ public class FavouriteBooksFragment extends Fragment implements RecyclerViewAdap
     }
 
     @Override
-    public void onDestroy() {
+    public void onStop() {
+        super.onStop();
         presenter.detachView();
+    }
+
+    @Override
+    public void onDestroy() {
         super.onDestroy();
     }
 
