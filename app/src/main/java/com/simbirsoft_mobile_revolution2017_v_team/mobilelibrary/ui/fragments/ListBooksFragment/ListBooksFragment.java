@@ -17,6 +17,10 @@ import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.view.ILibraryVi
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 public class ListBooksFragment extends Fragment implements RecyclerViewAdapter.OnBookClickListener, ILibraryView {
 
     public interface OnListFragmentEventListener{
@@ -25,16 +29,19 @@ public class ListBooksFragment extends Fragment implements RecyclerViewAdapter.O
 
     private LibraryPresenter presenter = new LibraryPresenter();
     private OnListFragmentEventListener parentFragment;
-    private RecyclerView mRecyclerView;
+
+    private Unbinder unbinder;
+    @BindView(R.id.rv_AllBooks)
+    RecyclerView mRecyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list_books, container, false);
+        unbinder = ButterKnife.bind(this, view);
 
         parentFragment = (OnListFragmentEventListener)getParentFragment();
 
-        mRecyclerView = view.findViewById(R.id.rvAllBooks);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -76,6 +83,12 @@ public class ListBooksFragment extends Fragment implements RecyclerViewAdapter.O
     public void onStop() {
         super.onStop();
         presenter.detachView();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
     @Override

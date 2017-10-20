@@ -18,18 +18,25 @@ import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.fragments.Li
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 public class FavouriteBooksFragment extends Fragment implements RecyclerViewAdapter.OnBookClickListener, ILibraryView {
 
     private List<Book> library = new ArrayList<>();
     private LibraryPresenter presenter = new LibraryPresenter();
-    private RecyclerView mRecyclerView;
+
+    private Unbinder unbinder;
+    @BindView(R.id.rv_Favourite)
+    RecyclerView mRecyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favourite_books, container, false);
+        unbinder = ButterKnife.bind(this, view);
 
-        mRecyclerView = view.findViewById(R.id.rv_Favourite);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -54,6 +61,12 @@ public class FavouriteBooksFragment extends Fragment implements RecyclerViewAdap
     public void onStop() {
         super.onStop();
         presenter.detachView();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
     @Override

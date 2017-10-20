@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Olegka on 04.10.2017.
  */
@@ -32,19 +35,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        // Можно еще добавить библиотеку ButterKnife
-        // для биндингов на UI
         public View view;
+
+        @BindView(R.id.name)
         public TextView textName;
+
+        @BindView(R.id.author)
         public TextView textAuthor;
+
         public String bookId;
         public OnBookClickListener bookClickListener;
 
         public ViewHolder(View v, OnBookClickListener abstractClickListener) {
             super(v);
             view = v;
-            textName = v.findViewById(R.id.name);
-            textAuthor = v.findViewById(R.id.author);
+            ButterKnife.bind(this, v);
             bookId = "-1";
             bookClickListener = abstractClickListener;
             v.setOnClickListener(this);

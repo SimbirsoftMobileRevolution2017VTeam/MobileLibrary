@@ -11,12 +11,15 @@ import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.R;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.activities.BookDetailActivity;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.fragments.ListBooksFragment.ListBooksFragment;
 
+import butterknife.BindView;
+
 public class LibraryFragment extends Fragment implements ListBooksFragment.OnListFragmentEventListener{
 
     public static final String BOOK_ID_ARGUMENT = "BOOK_ID";
 
     boolean mDualPane;
     Bundle arguments;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

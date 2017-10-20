@@ -7,7 +7,7 @@
 
     <!-- A RecyclerView with some commonly used attributes -->
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvAllBooks"
+        android:id="@+id/rv_AllBooks"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
