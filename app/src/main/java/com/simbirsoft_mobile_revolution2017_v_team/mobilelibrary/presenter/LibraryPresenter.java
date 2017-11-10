@@ -1,11 +1,15 @@
 package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.presenter;
 
+import android.content.Context;
+
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Book;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.BookBuilder;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.repository.IRepository;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.repository.LibraryRepository;
+import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.services.BaseResponse;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.view.ILibraryView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,6 +19,7 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
 
 
 public class LibraryPresenter {
@@ -28,6 +33,7 @@ public class LibraryPresenter {
     }
 
     public void loadLibrary() {
+
         libraryRepository.getBooks()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -40,11 +46,22 @@ public class LibraryPresenter {
                     throwable -> {
                         if (view != null) {
                             view.onError(throwable);
-                            tryCreateNewForShowing(library);
+                            //tryCreateNewForShowing(library);
                         }
                     }
                 );
 
+    }
+
+    public String addBookWithAsyncTask(Book book){
+        Call<BaseResponse<Book>> responseCall = libraryRepository.addBookWithAsyncTask(book);
+        String result = null;
+        try {
+            result = responseCall.execute().body().toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     public void addBook(String name, String author, long year, String publishingHouse,
@@ -63,6 +80,10 @@ public class LibraryPresenter {
                 .isFavourite(isFavourite)
                 .build();
 
+        addBook(book);
+    }
+
+    public void addBook(Book book){
         libraryRepository.addBook(book)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -90,7 +111,7 @@ public class LibraryPresenter {
                         }, throwable -> {
                             if (view != null) {
                                 view.onError(throwable);
-                                tryCreateNewForShowing(getFavouriteBooks(library));
+                                //tryCreateNewForShowing(getFavouriteBooks(library));
                             }
                         }
                 );
@@ -108,7 +129,7 @@ public class LibraryPresenter {
                         }, throwable -> {
                             if (view != null) {
                                 view.onError(throwable);
-                                getFictionBook(id);
+                                //getFictionBook(id);
                             }
                         }
                 );
@@ -118,6 +139,7 @@ public class LibraryPresenter {
         view = null;
     }
 
+    //region Fiction library
     private void tryCreateNewForShowing(List<Book> createdLibrary){
         Observable<List<Book>> observable = Observable.defer(new Callable<ObservableSource<? extends List<Book>>>() {
             @Override
@@ -334,4 +356,5 @@ public class LibraryPresenter {
         }
         return null;
     }
+    //endregion
 }

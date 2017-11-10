@@ -106,7 +106,7 @@ public class BookDetailFragment extends Fragment implements ILibraryView {
     }
 
     @Override
-    public void onDataCreated(List<Book> library) {
+    public void onDataCreated(String message) {
 
     }
 

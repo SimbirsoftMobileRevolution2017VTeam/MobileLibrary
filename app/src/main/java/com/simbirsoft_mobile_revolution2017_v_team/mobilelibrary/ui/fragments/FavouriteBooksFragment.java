@@ -86,7 +86,7 @@ public class FavouriteBooksFragment extends Fragment implements RecyclerViewAdap
     }
 
     @Override
-    public void onDataCreated(List<Book> library) {
+    public void onDataCreated(String message) {
 
     }
 

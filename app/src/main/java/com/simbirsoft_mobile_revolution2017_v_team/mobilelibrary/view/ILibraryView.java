@@ -11,6 +11,6 @@ import java.util.List;
 public interface ILibraryView {
     void onDataReceived(List<Book> library);
     void onDataReceived(Book book);
-    void onDataCreated(List<Book> library);
+    void onDataCreated(String message);
     void onError(Throwable error);
 }

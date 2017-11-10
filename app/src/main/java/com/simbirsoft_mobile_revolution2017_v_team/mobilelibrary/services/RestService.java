@@ -5,6 +5,7 @@ import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Book;
 import java.util.List;
 
 import io.reactivex.Observable;
+import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -18,36 +19,58 @@ import retrofit2.http.Query;
 
 public interface RestService {
 
-    String Base_URL = "https://android-cources.simbirsoft1.com/api/";
+    String Base_URL =  "http://api-factory.simbirsoft/api/";
 
     @Headers({
-            "X-Api-Factory-Application-Id:59ddb9baa4be20586d260ea1",
-            "Authorization:Basic NTlkZGI5YmFhNGJlMjA1ODZkMjYwZWExOjUzOWRiOTdkNmQ=",
+            "X-Api-Factory-Application-Id:5a045d6ff8a7ab6dcdf9fcbc",
+            "Authorization:Basic MTFkN2M5ZjozYTkwNzY5MTQ4",
             "Content-Type:application/json"
+
     })
     @GET("db/book")
     Observable<BaseResponse<List<Book>>> getBooks();
 
     @Headers({
-            "X-Api-Factory-Application-Id:59ddb9baa4be20586d260ea1",
-            "Authorization:Basic NTlkZGI5YmFhNGJlMjA1ODZkMjYwZWExOjUzOWRiOTdkNmQ=",
+            "X-Api-Factory-Application-Id:5a045d6ff8a7ab6dcdf9fcbc",
+            "Authorization:Basic MTFkN2M5ZjozYTkwNzY5MTQ4",
             "Content-Type:application/json"
+
+    })
+    @GET("db/book")
+    Call<BaseResponse<List<Book>>> getBooksWithoutRx();
+
+    @Headers({
+            "X-Api-Factory-Application-Id:5a045d6ff8a7ab6dcdf9fcbc",
+            "Authorization:Basic MTFkN2M5ZjozYTkwNzY5MTQ4",
+            "Content-Type:application/json"
+
     })
     @POST("db/book")
     Observable<BaseResponse<Book>> addBook(@Body Book book);
 
     @Headers({
-            "X-Api-Factory-Application-Id:59ddb9baa4be20586d260ea1",
-            "Authorization:Basic NTlkZGI5YmFhNGJlMjA1ODZkMjYwZWExOjUzOWRiOTdkNmQ=",
+            "X-Api-Factory-Application-Id:5a045d6ff8a7ab6dcdf9fcbc",
+            "Authorization:Basic MTFkN2M5ZjozYTkwNzY5MTQ4",
             "Content-Type:application/json"
+
+    })
+    @POST("db/book")
+    Call<BaseResponse<Book>> addBookWithAsyncTask(@Body Book book);
+
+    @Headers({
+            "X-Api-Factory-Application-Id:5a045d6ff8a7ab6dcdf9fcbc",
+            "Authorization:Basic MTFkN2M5ZjozYTkwNzY5MTQ4",
+            "Content-Type:application/json"
+
     })
     @GET("db/book/{id}")
     Observable<BaseResponse<Book>> getBook(@Path("id") String id);
 
     @Headers({
-            "X-Api-Factory-Application-Id:59ddb9baa4be20586d260ea1",
-            "Authorization:Basic NTlkZGI5YmFhNGJlMjA1ODZkMjYwZWExOjUzOWRiOTdkNmQ=",
+            "X-Api-Factory-Application-Id:5a045d6ff8a7ab6dcdf9fcbc",
+            "Authorization:Basic MTFkN2M5ZjozYTkwNzY5MTQ4",
             "Content-Type:application/json"
+
     })
     @GET("db/book/")
     Observable<BaseResponse<List<Book>>> getFavouriteBooks(@Query("isFavourite") boolean isFavourite);

@@ -9,17 +9,18 @@ import android.view.ViewGroup;
 
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.R;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.activities.BookDetailActivity;
+import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.fragments.ListBooksFragment.BookAdderFragment;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.fragments.ListBooksFragment.ListBooksFragment;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class LibraryFragment extends Fragment implements ListBooksFragment.OnListFragmentEventListener{
+public class LibraryFragment extends BookAdderFragment implements ListBooksFragment.OnListFragmentEventListener{
 
     public static final String BOOK_ID_ARGUMENT = "BOOK_ID";
 
     boolean mDualPane;
     Bundle arguments;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,5 +63,10 @@ public class LibraryFragment extends Fragment implements ListBooksFragment.OnLis
         if (mDualPane) {
             createDetailFragment();
         }
+    }
+
+    public void addBook(){
+        BookAdderFragment fragment = (BookAdderFragment) getChildFragmentManager().findFragmentById(R.id.fragment_list_books);
+        fragment.addBook();
     }
 }
