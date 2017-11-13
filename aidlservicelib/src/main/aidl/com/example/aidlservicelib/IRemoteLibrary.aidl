@@ -1,8 +1,8 @@
 // IRemoteLibrary.aidl
 package com.example.aidlservicelib;
 
-import com.example.aidlservicelib.Book;
+import com.example.aidlservicelib.IResultHandler;
 
 interface IRemoteLibrary {
-    List<Book> loadLibrary();
+    oneway void loadLibrary(IResultHandler callBack);
 }

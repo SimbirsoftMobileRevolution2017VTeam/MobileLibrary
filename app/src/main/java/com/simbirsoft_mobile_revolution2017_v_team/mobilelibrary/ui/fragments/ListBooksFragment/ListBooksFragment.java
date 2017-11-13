@@ -1,6 +1,12 @@
 package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.fragments.ListBooksFragment;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.AsyncTask;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.os.Bundle;
@@ -12,6 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.aidlservicelib.IRemoteLibrary;
+import com.example.aidlservicelib.IResultHandler;
 import com.loopeer.itemtouchhelperextension.ItemTouchHelperExtension;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.R;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Book;
@@ -21,6 +29,7 @@ import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.presenter.Serve
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.services.BaseResponse;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.view.ILibraryView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -36,12 +45,22 @@ public class ListBooksFragment extends BookAdderFragment implements RecyclerView
     private LibraryPresenter presenter = new LibraryPresenter();
     private OnListFragmentEventListener parentFragment;
 
-    private static final int LOADER_KEY = 111;
+    private IRemoteLibrary service;
+    private ServiceConnection connection;
 
     private Unbinder unbinder;
     @BindView(R.id.rv_AllBooks)
     RecyclerView mRecyclerView;
 
+    private final IResultHandler.Stub remoteLibraryHandler = new IResultHandler.Stub() {
+        @Override
+        public void handleLibraryResult(List<com.example.aidlservicelib.Book> library) throws RemoteException {
+            log("RemoteLibraryHandler start!!!");
+            BookConverter.getInstanceWithCallbackAndAIDLLibrary(ListBooksFragment.this, library).execute();
+        }
+    };
+
+    //region Lifecycle events
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -63,53 +82,8 @@ public class ListBooksFragment extends BookAdderFragment implements RecyclerView
     public void onStart() {
         super.onStart();
         //presenter.loadLibrary();
-        getLoaderManager().initLoader(LOADER_KEY, null, this).forceLoad();
-    }
-
-    @Override
-    public Loader<BaseResponse<List<Book>>> onCreateLoader(int id, Bundle args) {
-        return new ServerDataLoader(this.getContext());
-    }
-
-    @Override
-    public void onLoadFinished(Loader<BaseResponse<List<Book>>> loader, BaseResponse<List<Book>> data) {
-        Log.d("TAAAAAAAAAAAG", "FINISHED");
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(data.getData(), this);
-        mRecyclerView.setAdapter(adapter);
-        ItemTouchHelperCallback mCallback = new ItemTouchHelperCallback(adapter);
-        ItemTouchHelperExtension mItemTouchHelper = new ItemTouchHelperExtension(mCallback);
-        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
-    }
-
-    @Override
-    public void onLoaderReset(Loader loader) {
-
-    }
-
-    @Override
-    public void onBookClicked(String bookId) {
-        Toast.makeText(getActivity().getApplicationContext(),"library " + bookId, Toast.LENGTH_SHORT).show();
-        parentFragment.listFragmentEventTriggered(bookId);
-
-    }
-
-    @Override
-    public void onDataReceived(List<Book> library) {
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(library, this);
-        mRecyclerView.setAdapter(adapter);
-        ItemTouchHelperCallback mCallback = new ItemTouchHelperCallback(adapter);
-        ItemTouchHelperExtension mItemTouchHelper = new ItemTouchHelperExtension(mCallback);
-        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
-    }
-
-    @Override
-    public void onDataReceived(Book book) {
-
-    }
-
-    @Override
-    public void onDataCreated(String message) {
-        Toast.makeText(getActivity().getApplicationContext(),"Book was added to server: " + message, Toast.LENGTH_LONG).show();
+        //getLoaderManager().initLoader(LOADER_KEY, null, this).forceLoad();
+        takeDataFromAIDL();
     }
 
     @Override
@@ -127,23 +101,80 @@ public class ListBooksFragment extends BookAdderFragment implements RecyclerView
     @Override
     public void onDestroy() {
         super.onDestroy();
+        getContext().unbindService(connection);
+    }
+    //endregion
+
+    //region LoaderCallbacks logic
+    @Override
+    public Loader<BaseResponse<List<Book>>> onCreateLoader(int id, Bundle args) {
+        return new ServerDataLoader(this.getContext());
+    }
+
+    @Override
+    public void onLoadFinished(Loader<BaseResponse<List<Book>>> loader, BaseResponse<List<Book>> data) {
+        Log.d("TAAAAAAAAAAAG", "FINISHED");
+        bindDataToRecyclerView(data.getData());
+    }
+
+    @Override
+    public void onLoaderReset(Loader loader) {
+
+    }
+    //endregion
+
+    //region BookClicked event
+    @Override
+    public void onBookClicked(String bookId) {
+        Toast.makeText(getActivity().getApplicationContext(),"library " + bookId, Toast.LENGTH_SHORT).show();
+        parentFragment.listFragmentEventTriggered(bookId);
+
+    }
+    //endregion
+
+    //region LibraryCallbacks logic
+    @Override
+    public void onDataReceived(List<Book> library) {
+        log("OnDataReceived");
+        getContext().unbindService(connection);
+        bindDataToRecyclerView(library);
+    }
+
+    @Override
+    public void onDataReceived(Book book) {
+
+    }
+
+    @Override
+    public void onDataCreated(String message) {
+        Toast.makeText(getActivity().getApplicationContext(),"Book was added to server: " + message, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onError(Throwable error) {
         Toast.makeText(getActivity().getApplicationContext(),"library fail " + String.valueOf(error), Toast.LENGTH_LONG).show();
     }
+    //endregion
 
+    //region BookAdder with asyncTask
     @Override
     public void addBook(){
-        BookUploader uploader = new BookUploader(this, presenter);
-        uploader.execute();
+        BookUploader.getInstanceWithCallbackAndPresenter(this, presenter).execute();
     }
 
-    private class BookUploader extends AsyncTask<Void,Void,String>{
+    public static class BookUploader extends AsyncTask<Void,Void,String>{
 
         ILibraryView callBack;
         LibraryPresenter adder;
+
+        private static BookUploader instance;
+
+        static BookUploader getInstanceWithCallbackAndPresenter(ILibraryView callBack, LibraryPresenter presenter){
+            if(instance != null){
+                return instance;
+            }
+            return instance = new BookUploader(callBack, presenter);
+        }
 
         @Override
         protected String doInBackground(Void... voids) {
@@ -157,10 +188,10 @@ public class ListBooksFragment extends BookAdderFragment implements RecyclerView
                             .isAvailable(true)
                             .isFavourite(true)
                             .wasReaded(false));
-            return presenter.addBookWithAsyncTask(book);
+            return adder.addBookWithAsyncTask(book);
         }
 
-        public BookUploader(ILibraryView callBack, LibraryPresenter adder) {
+        private BookUploader(ILibraryView callBack, LibraryPresenter adder) {
             super();
             this.callBack = callBack;
             this.adder = adder;
@@ -176,5 +207,112 @@ public class ListBooksFragment extends BookAdderFragment implements RecyclerView
             super.onPostExecute(message);
             callBack.onDataCreated(message);
         }
+    }
+    //endregion
+
+    private void takeDataFromAIDL(){
+        log("Started");
+        connectWithLibraryService();
+    }
+
+    private void bindDataToRecyclerView(List<Book> library){
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(library, this);
+        mRecyclerView.setAdapter(adapter);
+        ItemTouchHelperCallback mCallback = new ItemTouchHelperCallback(adapter);
+        ItemTouchHelperExtension mItemTouchHelper = new ItemTouchHelperExtension(mCallback);
+        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
+        log("Data was bind");
+    }
+
+    private void connectWithLibraryService(){
+        log("Try to connect service");
+        connection = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+                service = IRemoteLibrary.Stub.asInterface(iBinder);
+                log("AIDL service connected");
+                try {
+                    log("Service start loading");
+                    service.loadLibrary(remoteLibraryHandler);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                    log(e.getMessage());
+                }
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName componentName) {
+                service = null;
+                log("AIDL service disconnected");
+            }
+        };
+        Intent intent = new Intent();
+        intent.setComponent(new ComponentName("com.example.libraryservice", "com.example.libraryservice.LibraryService"));//("com.example.libraryservice.LibraryService");
+        //intent.setPackage("com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary");
+        getContext().bindService(intent, connection, Context.BIND_AUTO_CREATE);
+    }
+
+    public static class BookConverter extends AsyncTask<Void, Void, List<Book>> {
+
+        ILibraryView callBack;
+        List<com.example.aidlservicelib.Book> aidlLibrary;
+
+        private static BookConverter instance;
+
+        static BookConverter getInstanceWithCallbackAndAIDLLibrary(ILibraryView callBack, List<com.example.aidlservicelib.Book> aidlLibrary){
+            if(instance != null){
+                return instance;
+            }
+            return instance = new BookConverter(callBack, aidlLibrary);
+        }
+
+        private BookConverter(ILibraryView callBack, List<com.example.aidlservicelib.Book> aidlLibrary) {
+            super();
+            this.callBack = callBack;
+            this.aidlLibrary = aidlLibrary;
+        }
+
+        @Override
+        protected List<Book> doInBackground(Void... voids) {
+            log("Do in Background!");
+            return convertToApplicationBook();
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(List<Book> library) {
+            super.onPostExecute(library);
+            callBack.onDataReceived(library);
+        }
+
+        private List<Book> convertToApplicationBook(){
+            List<Book> applicationLibrary = new ArrayList<>();
+            log("Start converting");
+            for (com.example.aidlservicelib.Book book: aidlLibrary) {
+                applicationLibrary.add(new Book(new BookBuilder().name(book.getName())
+                        .author(book.getAuthor())
+                        .year(book.getYear())
+                        .ISBN(book.getISBN())
+                        .numberOfPages(book.getNumberOfPages())
+                        .publishingHouse(book.getPublishingHouse())
+                        .isFavourite(book.isFavourite())
+                        .wasReaded(book.isWasRead())
+                        .isAvailable(book.isAvailable())));
+            }
+            log("Converting done!");
+            return applicationLibrary;
+        }
+
+        private void log(String message){
+            Log.d("MobileLibrary.Converter", message);
+        }
+    }
+
+    private void log(String message){
+        Log.d("MobileLibrary", message);
     }
 }

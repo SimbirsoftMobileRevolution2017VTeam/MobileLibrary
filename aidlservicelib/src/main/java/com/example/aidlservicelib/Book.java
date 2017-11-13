@@ -40,6 +40,31 @@ public class Book implements Parcelable {
         this.isFavourite = isFavourite;
     }
 
+    protected Book(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+        author = in.readString();
+        year = in.readLong();
+        publishingHouse = in.readString();
+        ISBN = in.readString();
+        numberOfPages = in.readInt();
+        isAvailable = in.readByte() != 0;
+        wasRead = in.readByte() != 0;
+        isFavourite = in.readByte() != 0;
+    }
+
+    public static final Creator<Book> CREATOR = new Creator<Book>() {
+        @Override
+        public Book createFromParcel(Parcel in) {
+            return new Book(in);
+        }
+
+        @Override
+        public Book[] newArray(int size) {
+            return new Book[size];
+        }
+    };
+
     public String getId() {
         return id;
     }
@@ -84,20 +109,6 @@ public class Book implements Parcelable {
         return format;
     }
 
-    protected Book(Parcel in) {
-    }
-
-    public static final Creator<Book> CREATOR = new Creator<Book>() {
-        @Override
-        public Book createFromParcel(Parcel in) {
-            return new Book(in);
-        }
-
-        @Override
-        public Book[] newArray(int size) {
-            return new Book[size];
-        }
-    };
 
     @Override
     public int describeContents() {
@@ -106,5 +117,15 @@ public class Book implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(name);
+        parcel.writeString(author);
+        parcel.writeLong(year);
+        parcel.writeString(publishingHouse);
+        parcel.writeString(ISBN);
+        parcel.writeInt(numberOfPages);
+        parcel.writeByte((byte) (isAvailable ? 1 : 0));
+        parcel.writeByte((byte) (wasRead ? 1 : 0));
+        parcel.writeByte((byte) (isFavourite ? 1 : 0));
     }
 }
