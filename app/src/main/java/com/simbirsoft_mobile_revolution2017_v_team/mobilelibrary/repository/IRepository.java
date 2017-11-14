@@ -11,7 +11,6 @@ import io.reactivex.Observable;
  */
 
 public interface IRepository {
-
     Observable<List<Book>> getBooks();
     Observable<List<Book>> getFavouriteBooks();
     Observable<Book> addBook(Book book);

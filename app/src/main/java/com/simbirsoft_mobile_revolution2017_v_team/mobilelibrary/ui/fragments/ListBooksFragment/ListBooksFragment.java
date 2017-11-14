@@ -14,7 +14,6 @@ import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Book;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.presenter.LibraryPresenter;
 import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.view.ILibraryView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListBooksFragment extends Fragment implements RecyclerViewAdapter.OnBookClickListener, ILibraryView {

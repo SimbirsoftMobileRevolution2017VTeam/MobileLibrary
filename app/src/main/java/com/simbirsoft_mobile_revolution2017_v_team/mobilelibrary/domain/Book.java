@@ -25,7 +25,7 @@ public class Book {
     @SerializedName("publishingHouse")
     private String publishingHouse;
 
-    @SerializedName("ISBN")
+    @SerializedName("isbn")
     private String ISBN;
 
     @SerializedName("numberOfPages")
