@@ -18,7 +18,8 @@ import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.fragments.Li
 import java.util.ArrayList;
 import java.util.List;
 
-public class FavouriteBooksFragment extends Fragment implements RecyclerViewAdapter.OnBookClickListener, ILibraryView {
+public class FavouriteBooksFragment extends Fragment
+        implements RecyclerViewAdapter.OnBookClickListener, ILibraryView {
 
     private List<Book> library = new ArrayList<>();
     private LibraryPresenter presenter = new LibraryPresenter();

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_book_detail"
-        android:name="com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.fragments.BookDetailFragment"
+        android:name="com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.ui.fragments.BookDetailFragmentK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:layout="@layout/fragment_book_detail" />

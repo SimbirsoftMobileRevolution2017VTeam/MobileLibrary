@@ -12,37 +12,47 @@ import java.util.*
 class BookK(private var bookBuilder: BookBuilderK){
 
     @SerializedName("id")
-    private var id: String? = ""
+    var id: String? = ""
+        private set
 
     @SerializedName("name")
-    private var name: String? = null
+    var name: String? = null
+        private set
 
     @SerializedName("author")
-    private var author: String? = null
+    var author: String? = null
+        private set
 
     @SerializedName("year")
-    private var year: Long = 0
+    var year: Long = 0
+        private set
 
     @SerializedName("publishingHouse")
-    private var publishingHouse: String? = null
+    var publishingHouse: String? = null
+        private set
 
-    @SerializedName("isbn")
-    private var isbn: String? = null
+    @SerializedName("ISBN")
+    var isbn: String? = null
+        private set
 
     @SerializedName("numberOfPages")
-    private var numberOfPages: Int = 0
+    var numberOfPages: Int = 0
+        private set
 
     @SerializedName("isAvailable")
-    private var isAvailable: Boolean = false
+    var isAvailable: Boolean = false
+        private set
 
     @SerializedName("wasReaded")
-    private var wasReaded: Boolean = false
+    var wasReaded: Boolean = false
+        private set
 
     @SerializedName("isFavourite")
-    private var isFavourite: Boolean = false
+    var isFavourite: Boolean = false
+        private set
 
     companion object {
-        private val format = SimpleDateFormat("yyyy", Locale.ENGLISH)
+        val format = SimpleDateFormat("yyyy", Locale.ENGLISH)
     }
 
     init {

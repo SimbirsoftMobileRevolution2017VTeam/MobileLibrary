@@ -25,5 +25,4 @@ public class BookDetailActivity extends FragmentActivity {
             getSupportFragmentManager().beginTransaction().add(android.R.id.content, fragment).commit();
         }
     }
-
 }

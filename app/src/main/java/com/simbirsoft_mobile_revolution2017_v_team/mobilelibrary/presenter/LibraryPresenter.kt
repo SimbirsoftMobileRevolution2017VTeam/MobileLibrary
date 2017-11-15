@@ -1,9 +1,9 @@
 package com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.presenter
 
-import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.Book
-import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.BookBuilder
-import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.repository.LibraryRepository
-import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.view.ILibraryView
+import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.BookK
+import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.domain.BookBuilderK
+import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.repository.LibraryRepositoryK
+import com.simbirsoft_mobile_revolution2017_v_team.mobilelibrary.view.ILibraryViewK
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -12,18 +12,29 @@ import io.reactivex.schedulers.Schedulers
  */
 
 class LibraryPresenterK {
-    private var view: ILibraryView? = null
-    private val libraryRepository = LibraryRepository()
+    private var view: ILibraryViewK? = null
+    private val libraryRepository = LibraryRepositoryK()
 
-    fun attachView(view: ILibraryView) {
+    fun attachView(view: ILibraryViewK) {
         this.view = view
+    }
+
+    fun loadLibrary() {
+        libraryRepository.getBooks()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { books -> view?.onDataReceived(books) },
+                        { throwable -> view?.onError(throwable) }
+                )
+
     }
 
     fun addBook(name: String, author: String, year: Long, publishingHouse: String,
                 ISBN: String, numberOfPages: Int, isAvailable: Boolean, wasReaded: Boolean,
                 isFavourite: Boolean) {
 
-        val book = BookBuilder()
+        val book = BookBuilderK()
                 .name(name)
                 .author(author)
                 .year(year)
@@ -45,11 +56,11 @@ class LibraryPresenterK {
     }
 
     fun loadFavourites() {
-        libraryRepository.favouriteBooks
+        libraryRepository.getFavouriteBooks()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { books : List<Book> -> view?.onDataReceived(books) },
+                        { books : List<BookK> -> view?.onDataReceived(books) },
                         { throwable : Throwable -> view?.onError(throwable) }
                 )
     }
