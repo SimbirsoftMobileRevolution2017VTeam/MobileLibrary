@@ -9,7 +9,7 @@ import java.util.*
  * Created by user on 14.11.2017.
  */
 
-class BookK(private var bookBuilder: BookBuilderK){
+class BookK(bookBuilder: BookBuilderK){
 
     @SerializedName("id")
     var id: String? = ""
